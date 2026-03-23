@@ -1,4 +1,4 @@
-package CreatureControl;
+package CreatureControl.creatures;
 
 public class Creature {
     protected String name;

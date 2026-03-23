@@ -1,7 +1,7 @@
-package CreatureControl;
+package CreatureControl.creatures;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import CreatureControl.creatures.Creature;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
