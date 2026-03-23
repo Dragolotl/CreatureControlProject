@@ -1,6 +1,6 @@
 # Critter Control!
 
-For our project, three of the patterns we will be using are factory pattern, decorator pattern, and strategy pattern. <br>
+For our project, three of the patterns we will be using are factory pattern, decorator pattern, and strategy pattern. <br><br>
 Factory Pattern will be used for creating our diffrent Creatures whenever a new Creature needs to be made. 
 <br>
 
