@@ -3,10 +3,8 @@ package CritterControl.critters;
 import CritterControl.Food.Food;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import CritterControl.critters.Critter;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.testng.AssertJUnit.assertEquals;
 
 public class CritterTest {
     CritterFactory critterFactory = new CritterFactory();

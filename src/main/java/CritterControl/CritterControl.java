@@ -28,7 +28,9 @@ public class CritterControl {
     public int getGold() {
         return gold;
     }
-
+    public int getFoodAmount(){
+        return food;
+    }
     public void addFood(int foodEarned) {
         food += foodEarned;
     }

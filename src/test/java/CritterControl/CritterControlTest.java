@@ -32,4 +32,14 @@ public class CritterControlTest {
 
         assertEquals(0, critterControl.getGold());
     }
+    @Test
+    public void testMinimumFoodAmount() {
+        CritterCorral corral = new CritterCorral();
+        CritterControl critterControl = new CritterControl(corral);
+
+        critterControl.addFood(5);
+        critterControl.loseFood(10);
+
+        assertEquals(0, critterControl.getFoodAmount());
+    }
 }
