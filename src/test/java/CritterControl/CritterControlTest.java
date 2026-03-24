@@ -1,5 +1,8 @@
 package CritterControl;
 
+
+import CritterControl.CritterControl;
+import CritterControl.CritterCorral;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -17,6 +20,16 @@ public class CritterControlTest {
         assertEquals(15, critterControl.getGold());
 
         critterControl.loseGold(25);
+        assertEquals(0, critterControl.getGold());
+    }
+    @Test
+    public void testMinimumGold(){
+        CritterCorral corral = new CritterCorral();
+        CritterControl critterControl = new CritterControl(corral);
+
+        critterControl.addGold(10);
+        critterControl.loseGold(11);
+
         assertEquals(0, critterControl.getGold());
     }
 }

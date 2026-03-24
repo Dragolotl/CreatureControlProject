@@ -1,17 +1,23 @@
 package CritterControl.critters;
 
+import CritterControl.Food.Food;
+
 abstract public class Critter {
+    protected static final double DEFAULT_HAPPINESS=100.0;
     protected String name;
     private Double health;
-
+    private Double happiness;
     public Critter(String name){
         this.name = name;
         this.health = 5.0;
+        this.happiness=DEFAULT_HAPPINESS;
+
     }
 
     public Critter(String name, Double health) {
         this.name = name;
         this.health = health;
+        this.happiness=DEFAULT_HAPPINESS;
     }
 
     public String getName(){
@@ -19,5 +25,17 @@ abstract public class Critter {
     };
     public double getHealth(){
         return this.health;
+    }
+
+    public void eat(Food food){
+        health+=food.getHealthValue();
+        happiness+=food.getHappinessValue();
+        if (happiness>=100.0){
+            happiness=100.0;
+        }
+    }
+
+    public Double getHappiness() {
+        return happiness;
     }
 }
