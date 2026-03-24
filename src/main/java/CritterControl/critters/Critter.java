@@ -14,6 +14,7 @@ abstract public class Critter {
         this.health = health;
     }
 
+    public string getName(return this.name);
     public double getHealth(){
         return this.health;
     }

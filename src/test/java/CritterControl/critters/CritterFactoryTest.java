@@ -13,6 +13,7 @@ public class CritterFactoryTest {
     public void testCritterType1() {
         Critter critter = critterFactory.createCritterType1("placeholder");
         assertInstanceOf(CritterType1.class, critter);
+        assertEquals("placeholder",critter.getName());
     }
 
     @Test
