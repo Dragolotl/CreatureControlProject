@@ -1,6 +1,5 @@
 package CritterControl;
 
-
 import CritterControl.CritterControl;
 import CritterControl.CritterCorral;
 import org.junit.jupiter.api.Test;

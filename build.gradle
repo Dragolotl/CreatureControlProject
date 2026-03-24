@@ -1,0 +1,39 @@
+plugins {
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    implementation "org.slf4j:slf4j-api:2.0.17"
+    runtimeOnly 'ch.qos.logback:logback-classic:1.5.32'
+    testRuntimeOnly 'ch.qos.logback:logback-classic:1.5.32'
+
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testImplementation 'org.junit.platform:junit-platform-suite:1.10.0'
+
+    // BDD testing libraries
+    testImplementation 'io.cucumber:cucumber-picocontainer:7.21.1'
+    testImplementation 'io.cucumber:cucumber-java:7.21.1'
+    testImplementation 'io.cucumber:cucumber-junit-platform-engine:7.21.1'
+}
+
+test {
+    useJUnitPlatform()
+    modularity.inferModulePath = false
+}
+
+configurations {
+    cucumberRuntime {
+        extendsFrom testRuntimeOnly
+    }
+}
+
+tasks.withType(Javadoc).configureEach {
+    options.quiet()
+}
