@@ -11,8 +11,8 @@ public class CritterFactoryTest {
     //For now, they will only assertInstanceOf
     @Test
     public void testCritterType1() {
-        Critter critter = critterFactory.createCritterType1("placeholder");
-        assertInstanceOf(CritterType1.class, critter);
+        Critter critter = critterFactory.createMinitaur("placeholder");
+        assertInstanceOf(Minitaur.class, critter);
         assertEquals("placeholder",critter.getName());
     }
 
