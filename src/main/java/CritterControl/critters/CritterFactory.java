@@ -2,7 +2,7 @@ package CritterControl.critters;
 
 public class CritterFactory {
     public Critter createCritterType1(String name) {
-        return new CritterType1(name);
+        return new Minitaur(name);
     }
 
     public Critter createCritterType2(String name) {
