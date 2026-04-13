@@ -7,6 +7,7 @@ abstract public class Critter {
     protected static final double DEFAULT_HEALTH = 5.0;
     protected String name;
     private Double health;
+    private int level;
     private Double happiness; //TODO - IS HAPPINESS STILL A FACTOR IN THIS GAME?
 
     public Critter(String name){
@@ -20,11 +21,12 @@ abstract public class Critter {
     }
 
     public String getName(){
-        return this.name;
+        return name;
     };
     public double getHealth(){
-        return this.health;
+        return health;
     }
+    public int getLevel() { return level; }
 
     //Is this how eating works with the game as it is?
     //TODO - DECIDE HOW EAT SHOULD WORK
