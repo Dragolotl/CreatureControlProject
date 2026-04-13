@@ -1,8 +1,10 @@
 package CritterControl.critters;
 
 public class CritterFactory {
-    public Critter createCritterType1(String name) {
-        return new Minitaur(name);
+    protected static final double MINITAUR_DEFAULT_HEALTH = 5.0;
+
+    public Critter createMinitaur(String name) {
+        return new Minitaur(name, MINITAUR_DEFAULT_HEALTH);
     }
 
     public Critter createCritterType2(String name) {
