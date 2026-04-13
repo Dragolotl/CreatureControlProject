@@ -10,6 +10,8 @@ abstract public class Critter {
     private int level;
     private Double happiness; //TODO - IS HAPPINESS STILL A FACTOR IN THIS GAME?
 
+    public Critter() {}
+
     public Critter(String name){
         this(name, DEFAULT_HEALTH);
     }
@@ -27,15 +29,36 @@ abstract public class Critter {
         return health;
     }
     public int getLevel() { return level; }
+    public void setHealth(Double healthValue) { this.health = healthValue; }
+    public void setHappiness(Double happinessValue) {
+        this.happiness = happinessValue;
+        if (getHappiness() > 100.0){
+            setHappiness(100.0);
+        }
+
+        if (getHappiness() < 0.0) {
+            setHappiness(0.0);
+        }
+    }
 
     //Is this how eating works with the game as it is?
     //TODO - DECIDE HOW EAT SHOULD WORK
     public void eat(Food food){
-        health += food.getHealthValue();
-        happiness += food.getHappinessValue();
-        if (happiness >= 100.0){
-            happiness = 100.0;
+        addHealth(food.getHealthValue());
+        setHappiness(getHappiness() + food.getHappinessValue());
+    }
+
+    public void addHealth(Double healthGained) {
+        setHealth(getHealth() + healthGained);
+    }
+
+    public void loseHealth(Double healthLost) {
+        if (getHealth() <= 0) {
+            // already dead, probably called for mandatory health loss for having a fight
+            return;
         }
+
+        setHealth(getHealth() - healthLost);
     }
 
     public Double getHappiness() {

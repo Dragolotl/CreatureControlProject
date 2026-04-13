@@ -4,6 +4,7 @@ import CritterControl.critters.Critter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 public class CritterCorral {
@@ -29,7 +30,7 @@ public class CritterCorral {
         if (critters.contains(critter)) {
             critters.remove(critter);
         } else {
-
+            throw new NoSuchElementException(critter.getName() + "does not exist!");
         }
     }
 
