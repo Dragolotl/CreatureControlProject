@@ -1,13 +1,8 @@
 package CritterControl.Accessories;
 
-public class Accessory {
-    private final String name;
-
-    public Accessory(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
+public record Accessory(String name, double healthBoost, double strengthBoost, double speedBoost, double magicBoost) {
+    @Override
+    public String toString() {
         return name;
     }
 }

@@ -64,4 +64,8 @@ abstract public class Critter {
     public Double getHappiness() {
         return happiness;
     }
+
+    public boolean isAccessorized() {
+        return false;
+    }
 }

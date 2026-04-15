@@ -3,8 +3,8 @@ package CritterControl.critters;
 import CritterControl.Accessories.Accessory;
 
 public class AccessorizedCritter extends Critter {
-    private Critter myself;
-    private Accessory accessory;
+    private final Critter myself;
+    private final Accessory accessory;
 
     public AccessorizedCritter(Critter myself, Accessory accessory) {
         this.myself = myself;
@@ -13,7 +13,7 @@ public class AccessorizedCritter extends Critter {
 
     @Override
     public String getName() {
-        return getBaseName() + ", " + accessory.getName();
+        return getBaseName() + ", " + accessory.name();
     }
 
     public String getBaseName() {
@@ -22,7 +22,7 @@ public class AccessorizedCritter extends Critter {
 
     @Override
     public double getHealth() {
-        return myself.getHealth();
+        return myself.getHealth() + accessory.healthBoost();
     }
 
     @Override
@@ -35,6 +35,10 @@ public class AccessorizedCritter extends Critter {
         return myself.getHappiness();
     }
 
+    public Accessory getAccessory () {
+        return accessory;
+    }
+
     @Override
     public void setHealth(Double healthValue) {
         myself.setHealth(healthValue);
@@ -45,6 +49,10 @@ public class AccessorizedCritter extends Critter {
         myself.setHappiness(happinessValue);
     }
 
+    @Override
+    public boolean isAccessorized() {
+        return true;
+    }
 
 
 }
