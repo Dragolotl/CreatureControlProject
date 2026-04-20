@@ -32,7 +32,6 @@ public class AccessoryFactory {
     //create an accessory of random level and stats
     public Accessory createRandomAccessory(int maxLevel) {
         int level = rand.nextInt(maxLevel);
-
         double randomHealthBoost = rand.nextDouble();
         double randomStrengthBoost = generateRandomStatValue(level);
         double randomSpeedBoost = generateRandomStatValue(level);
