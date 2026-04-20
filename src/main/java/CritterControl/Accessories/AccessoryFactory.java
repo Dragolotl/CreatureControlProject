@@ -9,7 +9,7 @@ public class AccessoryFactory {
     private static final int CREATOR_NAME_LEVEL_THRESHOLD = 7;
     private static final int ADJECTIVE_LEVEL_THRESHOLD = 4;
 
-    private static final List<String> ACCESSORY_CREATOR_NAMES = List.of("Davior", "Gale", "Xanathar", "Volo", "Tasha", "Acererak", "Desirae", "Melgani", "Elspeth", "Chandra", "Jace", "Lilith");
+    private static final List<String> ACCESSORY_CREATOR_NAMES = List.of("Davior", "Gale", "Xanathar", "Volo", "Tasha", "Acererak", "Desirae", "Melgani", "Elspeth", "Chandra", "Jace", "Lilith", "Caleb", "");
     private static final List<String> ACCESSORY_ADJECTIVES = List.of("Fabulous", "Wonderful", "Bombastic", "Decent", "Strange", "Gaudy", "Silly", "Heavenly", "Mighty", "Resilient", "Lucky", "Imaginary", "Supercalifragilisticexpialidocious");
     private static final List<String> ACCESSORY_NAMES = List.of("Robe", "Rod", "Hat", "Boots", "Sunglasses", "Necklace", "Amulet", "Cape", "Tchotchke", "Orb",  "Friendship Bracelet", "Thigh-highs");
 
@@ -29,7 +29,10 @@ public class AccessoryFactory {
         return createAccessory(DEFAULT_LEVEL, DEFAULT_HEALTH_BOOST, DEFAULT_STRENGTH_BOOST, DEFAULT_SPEED_BOOST, DEFAULT_MAGIC_BOOST);
     }
 
-    public Accessory createRandomAccessory(int level) {
+    //create an accessory of random level and stats
+    public Accessory createRandomAccessory(int maxLevel) {
+        int level = rand.nextInt(maxLevel);
+
         double randomHealthBoost = rand.nextDouble();
         double randomStrengthBoost = generateRandomStatValue(level);
         double randomSpeedBoost = generateRandomStatValue(level);
