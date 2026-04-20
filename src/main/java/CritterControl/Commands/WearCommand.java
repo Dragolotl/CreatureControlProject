@@ -35,6 +35,4 @@ public class WearCommand extends Command {
         corral.remove(accessory);
         return accessory;
     }
-
-
 }
