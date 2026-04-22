@@ -1,5 +1,6 @@
 package CritterControl.critters;
 
+import CritterControl.Accessories.Accessory;
 import CritterControl.Food.Food;
 
 abstract public class Critter {
@@ -63,6 +64,10 @@ abstract public class Critter {
 
     public Double getHappiness() {
         return happiness;
+    }
+
+    public Accessory getAccessory() {
+        return null;
     }
 
     public boolean isAccessorized() {

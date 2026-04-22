@@ -60,4 +60,6 @@ public class CritterCorral {
     public List<Critter> getCritters() {
         return critters;
     }
+
+    public List<Accessory> getWardrobe() {return wardrobe; }
 }

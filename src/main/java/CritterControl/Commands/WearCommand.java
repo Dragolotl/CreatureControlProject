@@ -23,13 +23,17 @@ public class WearCommand extends Command {
     @Override
     public boolean execute() {
         Critter accessorizedCritter = critterFactory.createAccessorizedCritter(critter, getAccessory());
+        if (critter.isAccessorized()) {
+            corral.add(critter.getAccessory());
+        }
+
         corral.replace(critter, accessorizedCritter);
         logger.info("{} put on: {}", critter.getName(), accessory);
         return true;
     }
 
     private Accessory getAccessory() {
-        if (corral.contains(accessory)) {
+        if (!corral.contains(accessory)) {
             logger.warn("Accessory not in wardrobe");
         }
         corral.remove(accessory);

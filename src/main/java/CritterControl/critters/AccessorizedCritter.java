@@ -35,6 +35,7 @@ public class AccessorizedCritter extends Critter {
         return myself.getHappiness();
     }
 
+    @Override
     public Accessory getAccessory () {
         return accessory;
     }
