@@ -1,7 +1,5 @@
 package CritterControl;
 
-import CritterControl.CritterControl;
-import CritterControl.CritterCorral;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
