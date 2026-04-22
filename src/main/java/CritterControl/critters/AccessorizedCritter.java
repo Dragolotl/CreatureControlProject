@@ -16,6 +16,7 @@ public class AccessorizedCritter extends Critter {
         return getBaseName() + ", " + accessory.name();
     }
 
+    @Override
     public String getBaseName() {
         return myself.getName();
     }
