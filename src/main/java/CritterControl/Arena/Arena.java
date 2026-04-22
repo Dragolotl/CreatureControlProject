@@ -1,17 +1,21 @@
-package CritterControl;
+package CritterControl.Arena;
 
 import CritterControl.critters.Critter;
+
+import java.util.HashSet;
 
 abstract public class Arena {
     //3 diffrent types of arena
     //each Critter should have their own Arenas attached(I think) - OR Each Critter has its own CritterCorral/Enclosure that holds everything!
     private Double difficultyLevel;
+    private String type;
     //needs to contain modifiers for potential foes? Or does Arena possibly just need to be a single object more similar to Artifact rather than Maze?
     private Double modifier; //Or difficultyLevel IS the modifier?
     //List of prizes?
+    private Set<Hat> hats = new HashSet<>();
 
     //Constructor needs: Critter,
-    //could put a method in Critter to retreive its level
+    //could put a method in Critter to retrieve its level
     public Arena(Double difficultyLevel, Double modifier) {
         this.difficultyLevel = difficultyLevel;
         this.modifier = modifier;

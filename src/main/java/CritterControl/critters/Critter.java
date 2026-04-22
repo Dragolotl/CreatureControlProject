@@ -5,6 +5,7 @@ import CritterControl.Food.Food;
 abstract public class Critter {
     protected static final double DEFAULT_HAPPINESS=100.0;
     protected String name;
+    protected int level;
     private Double health;
     private Double happiness;
     private Double xp;
@@ -27,6 +28,9 @@ abstract public class Critter {
     };
     public double getHealth(){
         return this.health;
+    }
+    public int getLevel(){
+        return this.level;
     }
 
     public void eat(Food food){
