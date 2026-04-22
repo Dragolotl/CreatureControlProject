@@ -45,7 +45,6 @@ public class AccessoryFactory {
         //Calculation intended to increase likelihood of zero values by using range of (-maxValue, maxvalue)
         //and truncating to values >= 0
         return Math.max(0.0, rand.nextDouble(maxValue - minValue) + minValue);
-
     }
 
     private String generateRandomNameBasedOnLevel(int level) {
