@@ -10,12 +10,12 @@ public class CritterTest {
     CritterFactory critterFactory = new CritterFactory();
     @Test
     void testCreatureHasHungerLevel(){
-        Critter critter = critterFactory.createCritterType1("placeholder name");
+        Critter critter = critterFactory.createMinitaur("placeholder name");
         assertTrue(critter.getHealth() > 0);
     }
     @Test
     void testEat(){
-        Critter critter = critterFactory.createCritterType1("placeholder name");
+        Critter critter = critterFactory.createMinitaur("placeholder name");
         Food broccoli = new Food("Broccoli", 10.0, -1.0);
         Double initialHealth=critter.getHealth();
         Double initialHappiness=critter.getHappiness();

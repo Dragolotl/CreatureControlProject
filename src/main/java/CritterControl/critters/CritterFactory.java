@@ -1,8 +1,12 @@
 package CritterControl.critters;
 
+import CritterControl.Accessories.Accessory;
+
 public class CritterFactory {
-    public Critter createCritterType1(String name) {
-        return new CritterType1(name);
+    protected static final double MINITAUR_DEFAULT_HEALTH = 5.0;
+
+    public Critter createMinitaur(String name) {
+        return new Minitaur(name, MINITAUR_DEFAULT_HEALTH);
     }
 
     public Critter createCritterType2(String name) {
@@ -11,5 +15,9 @@ public class CritterFactory {
 
     public Critter createCritterType3(String name) {
         return new CritterType3(name);
+    }
+
+    public Critter createAccessorizedCritter(Critter myself, Accessory accessory) {
+        return new AccessorizedCritter(myself, accessory);
     }
 }
