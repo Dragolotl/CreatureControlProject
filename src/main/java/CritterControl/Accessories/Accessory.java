@@ -1,4 +1,4 @@
 package CritterControl.Accessories;
 
-public record Accessory(String name, double healthBoost, double strengthBoost, double speedBoost, double magicBoost) {
+public record Accessory(String name, int healthBoost, int strengthBoost, int speedBoost, int magicBoost) {
 }

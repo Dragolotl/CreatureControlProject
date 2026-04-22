@@ -13,14 +13,13 @@ public class AccessoryFactory {
     private static final List<String> ACCESSORY_ADJECTIVES = List.of("Fabulous", "Wonderful", "Bombastic", "Decent", "Strange", "Gaudy", "Silly", "Heavenly", "Mighty", "Resilient", "Lucky", "Imaginary", "Supercalifragilisticexpialidocious");
     private static final List<String> ACCESSORY_NAMES = List.of("Robe", "Rod", "Hat", "Boots", "Sunglasses", "Necklace", "Amulet", "Cape", "Tchotchke", "Orb",  "Friendship Bracelet", "Thigh-highs");
 
-    private static final int DEFAULT_LEVEL = 0;
-    private static final double DEFAULT_HEALTH_BOOST = 0.0;
-    private static final double DEFAULT_STRENGTH_BOOST = 0.0;
-    private static final double DEFAULT_SPEED_BOOST = 0.0;
-    private static final double DEFAULT_MAGIC_BOOST = 0.0;
+    public static final int DEFAULT_LEVEL = 0;
+    public static final int DEFAULT_HEALTH_BOOST = 0;
+    public static final int DEFAULT_STRENGTH_BOOST = 0;
+    public static final int DEFAULT_SPEED_BOOST = 0;
+    public static final int DEFAULT_MAGIC_BOOST = 0;
 
-
-    public Accessory createAccessory(int level, double healthBoost, double strengthBoost, double speedBoost, double magicBoost) {
+    public Accessory createAccessory(int level, int healthBoost, int strengthBoost, int speedBoost, int magicBoost) {
         String name = generateRandomNameBasedOnLevel(level);
         return new Accessory(name, healthBoost, strengthBoost, speedBoost, magicBoost);
     }
@@ -31,20 +30,20 @@ public class AccessoryFactory {
 
     //create an accessory of random level and stats
     public Accessory createRandomAccessory(int maxLevel) {
-        int level = rand.nextInt(maxLevel);
-        double randomHealthBoost = rand.nextDouble();
-        double randomStrengthBoost = generateRandomStatValue(level);
-        double randomSpeedBoost = generateRandomStatValue(level);
-        double randomMagicBoost = generateRandomStatValue(level);
+        int level = rand.nextInt(maxLevel) + 1;
+        int randomHealthBoost = rand.nextInt(level);
+        int randomStrengthBoost = generateRandomStatValue(level);
+        int randomSpeedBoost = generateRandomStatValue(level);
+        int randomMagicBoost = generateRandomStatValue(level);
 
         return createAccessory(level, randomHealthBoost, randomStrengthBoost, randomSpeedBoost, randomMagicBoost);
     }
 
-    private double generateRandomStatValue(double maxValue) {
-        double minValue = -maxValue;
+    private int generateRandomStatValue(int maxValue) {
+        int minValue = -maxValue;
         //Calculation intended to increase likelihood of zero values by using range of (-maxValue, maxvalue)
         //and truncating to values >= 0
-        return Math.max(0.0, rand.nextDouble(maxValue - minValue) + minValue);
+        return Math.max(0, rand.nextInt(maxValue - minValue) + minValue);
     }
 
     private String generateRandomNameBasedOnLevel(int level) {
