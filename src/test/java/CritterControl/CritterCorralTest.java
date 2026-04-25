@@ -15,7 +15,7 @@ public class CritterCorralTest {
     public void testConstructor() {
         List<Critter> critters = List.of(
                 critterFactory.createMinitaur("Dave"),
-                critterFactory.createCritterType2("Randy"),
+                critterFactory.createNecroBones("Randy"),
                 critterFactory.createCritterType3("Jorge")
         );
 
@@ -27,7 +27,7 @@ public class CritterCorralTest {
     public void testGetCritterByName() {
         List<Critter> critters = List.of(
                 critterFactory.createMinitaur("Dave"),
-                critterFactory.createCritterType2("Randy"),
+                critterFactory.createNecroBones("Randy"),
                 critterFactory.createCritterType3("Jorge")
         );
 

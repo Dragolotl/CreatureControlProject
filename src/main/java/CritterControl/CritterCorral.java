@@ -13,6 +13,7 @@ public class CritterCorral {
     private final List<Critter> critters = new ArrayList<>();
 
     public CritterCorral() {
+
     }
 
     public CritterCorral(List<Critter> critterList) {

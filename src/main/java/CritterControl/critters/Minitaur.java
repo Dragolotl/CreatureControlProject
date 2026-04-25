@@ -5,4 +5,8 @@ public class Minitaur extends Critter {
     public Minitaur(String name, double health) {
         super(name, health);
     }
+
+    public Minitaur(String name){
+        super(name);
+    }
 }

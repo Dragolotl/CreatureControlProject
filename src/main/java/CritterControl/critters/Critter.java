@@ -2,12 +2,17 @@ package CritterControl.critters;
 
 import CritterControl.Food.Food;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 abstract public class Critter {
     protected static final double DEFAULT_HAPPINESS=100.0;
     protected static final double DEFAULT_HEALTH = 5.0;
     protected String name;
     private Double health;
     private int level;
+    //Include a map that has the arena levels in it
+    private final Map<String, Integer> arenaLevel = new ConcurrentHashMap<>(); //<Type, Level>
     private Double happiness; //TODO - IS HAPPINESS STILL A FACTOR IN THIS GAME?
 
     public Critter(String name){
@@ -18,6 +23,10 @@ abstract public class Critter {
         this.name = name;
         this.health = health;
         this.happiness = DEFAULT_HAPPINESS;
+    }
+
+    public Critter(String name, Double health, int level){
+        this.name = name;
     }
 
     public String getName(){
@@ -40,5 +49,13 @@ abstract public class Critter {
 
     public Double getHappiness() {
         return happiness;
+    }
+
+    public void getArenaStage(String arenaType) { //This might be something we delete
+        arenaLevel.get(arenaType);
+    }
+
+    public void battle() {
+        //bring in a command
     }
 }

@@ -1,5 +1,7 @@
 package CritterControl.critters;
 
+import org.slf4j.Logger;
+
 public class CritterFactory {
     protected static final double MINITAUR_DEFAULT_HEALTH = 5.0;
 
@@ -7,11 +9,22 @@ public class CritterFactory {
         return new Minitaur(name, MINITAUR_DEFAULT_HEALTH);
     }
 
-    public Critter createCritterType2(String name) {
-        return new CritterType2(name);
+    public Critter createNecroBones(String name) {
+        return new NecroBones(name);
     }
 
     public Critter createCritterType3(String name) {
         return new CritterType3(name);
+    }
+
+    public Critter createCritter(CritterType type) {
+        return switch (type) {
+            case STRENGTH -> new Minitaur("Manny");
+            case MAGIC -> new NecroBones("Bones");
+            case SPEED -> new CritterType3("Sonic");
+//            default:
+//                System.out.println("Invalid Critter type.");
+
+        };
     }
 }

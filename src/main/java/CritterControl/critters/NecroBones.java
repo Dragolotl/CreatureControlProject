@@ -1,8 +1,8 @@
 package CritterControl.critters;
 
-public class CritterType2 extends Critter {
+public class NecroBones extends Critter {
     //Implementation TBD
-    public CritterType2(String name) {
+    public NecroBones(String name) {
         super(name);
     }
 

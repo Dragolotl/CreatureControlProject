@@ -12,7 +12,7 @@ abstract public class Arena {
     //needs to contain modifiers for potential foes? Or does Arena possibly just need to be a single object more similar to Artifact rather than Maze?
     private Double modifier; //Or difficultyLevel IS the modifier?
     //List of prizes?
-    private Set<Hat> hats = new HashSet<>();
+    //private Set<Hat> hats = new HashSet<>();
 
     //Constructor needs: Critter,
     //could put a method in Critter to retrieve its level
