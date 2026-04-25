@@ -13,6 +13,7 @@ public class CritterCorral {
     private final List<Accessory> wardrobe = new ArrayList<>();
 
     public CritterCorral() {
+
     }
 
     public CritterCorral(List<Critter> critterList) {
