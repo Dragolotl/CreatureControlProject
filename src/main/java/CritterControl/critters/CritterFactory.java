@@ -1,5 +1,6 @@
 package CritterControl.critters;
 
+import CritterControl.Accessories.Accessory;
 import org.slf4j.Logger;
 
 public class CritterFactory {
@@ -17,6 +18,10 @@ public class CritterFactory {
         return new CritterType3(name);
     }
 
+    public Critter createAccessorizedCritter(Critter myself, Accessory accessory) {
+        return new AccessorizedCritter(myself, accessory);
+    }
+  
     public Critter createCritter(CritterType type) {
         return switch (type) {
             case STRENGTH -> new Minitaur("Manny");
