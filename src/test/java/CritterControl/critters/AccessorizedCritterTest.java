@@ -34,11 +34,11 @@ public class AccessorizedCritterTest {
         corral.add(testAccessory);
         assertTrue(corral.contains(critter));
 
-        WearCommand wearCommand = new WearCommand(corral.getCritter("Test Critter").get(), corral, testAccessory);
+        WearCommand wearCommand = new WearCommand(corral.getCritterByName("Test Critter").get(), corral, testAccessory);
         wearCommand.execute();
 
         String expectedName = accessorizedCritter.getName();
-        String actualName = corral.getCritter(expectedName).get().getName();
+        String actualName = corral.getCritterByName(expectedName).get().getName();
 
         assertFalse(corral.contains(critter));
         assertEquals(expectedName, actualName);
