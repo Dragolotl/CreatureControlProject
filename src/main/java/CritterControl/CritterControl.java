@@ -27,7 +27,6 @@ public class CritterControl {
     private int food;
     private Boolean playing;
     private final CritterCorral corral;
-    private final Map<CritterType, Integer> arenaLevels = new ConcurrentHashMap<>();
     private CommandFactory commandFactory;
     //include a map that holds arena levels indexed by a possible arena enum
     //need a scanner
