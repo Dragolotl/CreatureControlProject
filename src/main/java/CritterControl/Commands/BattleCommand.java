@@ -24,6 +24,10 @@ public class BattleCommand extends Command{
     private final CritterType opponentType
     private final CritterCorral corral;
 
+    static {
+        initializeArenas();
+    }
+
     public BattleCommand(Critter player, CritterType opponentType, CritterCorral corral) {
         super(CommandType.BATTLE, player);
         this.opponent = critterFactory.createCritter(opponentType, arenaLevels.get(opponentType));
