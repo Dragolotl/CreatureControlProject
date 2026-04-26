@@ -61,7 +61,17 @@ abstract public class Critter {
         this.die = die;
     }
 
-    public abstract void setStrategyBasedOnLevel(int level);
+    public abstract void setStrategy();
+
+    protected void setStrategyBasedOnLevel(IStrategy level5Strategy, IStrategy level10Strategy) {
+        if (getLevel() < 5) {
+            strategy = strategyFactory.Level1Strategy();
+        } else if (getLevel() < 10) {
+            strategy = level5Strategy;
+        } else {
+            strategy = level10Strategy;
+        }
+    }
 
     //Is this how eating works with the game as it is?
     //TODO - DECIDE HOW EAT SHOULD WORK
