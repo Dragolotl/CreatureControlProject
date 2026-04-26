@@ -70,4 +70,24 @@ public class CritterCorral {
     }
 
     public List<Accessory> getWardrobe() { return wardrobe; }
+
+    public boolean printAllAccessories(){
+        if(wardrobe.isEmpty()){
+            System.out.println("Your wardrobe is empty! Try again when you have accessories.");
+            return false;
+        }else{
+            for (int i = 0; i < wardrobe.size(); i++) {
+                System.out.println((i+1) + ": " + wardrobe.toArray()[i]);
+            }
+            return true;
+        }
+    }
+
+    public Accessory getAccessoryByIndex(int index) {
+        if (index < 0 || index >= wardrobe.size()) {
+            return null;
+        }else{
+            return wardrobe.get(index);
+        }
+    }
 }
