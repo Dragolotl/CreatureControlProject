@@ -48,7 +48,7 @@ public class CritterControl {
     } //Also potentially code in an Arena if we do Ramsey's plan
 
     public void play() {
-        initializeArenas();
+        BattleCommand.initializeArenas();
         //Get player choice of critter
         Critter currentCritter = new Critter();
 
