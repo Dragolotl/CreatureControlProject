@@ -11,6 +11,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class BattleCommand extends Command{
+    public static final Map<CritterType, Integer> arenaLevels = new ConcurrentHashMap<>();
     private static final Scanner scanner = new Scanner(System.in);
     private static final Logger logger = org.slf4j.LoggerFactory.getLogger(BattleCommand.class);
     private static final CritterFactory  critterFactory = new CritterFactory();
