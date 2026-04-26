@@ -42,6 +42,7 @@ public class AccessorizedCritter extends Critter {
         return myself.getHappiness();
     }
 
+    @Override
     public Accessory getAccessory () {
         return accessory;
     }
@@ -60,6 +61,9 @@ public class AccessorizedCritter extends Critter {
     public void setHappiness(Double happinessValue) {
         myself.setHappiness(happinessValue);
     }
+
+    @Override
+    public void levelUp() {myself.levelUp();}
 
     @Override
     public void setStrategyBasedOnLevel(int level) {
