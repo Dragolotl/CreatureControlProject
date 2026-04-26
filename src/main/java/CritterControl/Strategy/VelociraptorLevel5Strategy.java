@@ -1,10 +1,12 @@
 package CritterControl.Strategy;
 
 public class VelociraptorLevel5Strategy extends Level1Strategy {
+    public static final int DODGE_DAMAGE_BONUS = 1;
+
     @Override
     public int addDodgeDamageBonus() {
         if (dodged()) {
-            return 2;
+            return DODGE_DAMAGE_BONUS;
         }
 
         return 0;
