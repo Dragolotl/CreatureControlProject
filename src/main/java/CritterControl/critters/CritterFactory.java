@@ -1,13 +1,12 @@
 package CritterControl.critters;
 
 import CritterControl.Accessories.Accessory;
-import org.slf4j.Logger;
 
 public class CritterFactory {
-    protected static final double MINITAUR_DEFAULT_HEALTH = 5.0;
+    protected static final int CRITTER_DEFAULT_HEALTH = 5;
 
     public Critter createMinitaur(String name) {
-        return new Minitaur(name, MINITAUR_DEFAULT_HEALTH);
+        return new Minitaur(name, CRITTER_DEFAULT_HEALTH);
     }
 
     public Critter createNecroBones(String name) {
@@ -15,7 +14,7 @@ public class CritterFactory {
     }
 
     public Critter createCritterType3(String name) {
-        return new CritterType3(name);
+        return new Velociraptor(name);
     }
 
     public Critter createAccessorizedCritter(Critter myself, Accessory accessory) {
@@ -26,7 +25,7 @@ public class CritterFactory {
         return switch (type) {
             case STRENGTH -> new Minitaur("Manny");
             case MAGIC -> new NecroBones("Bones");
-            case SPEED -> new CritterType3("Sonic");
+            case SPEED -> new Velociraptor("Sonic");
 //            default:
 //                System.out.println("Invalid Critter type.");
 
