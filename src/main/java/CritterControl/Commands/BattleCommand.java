@@ -102,4 +102,10 @@ public class BattleCommand extends Command{
     private boolean checkForStunned(Critter critter) {
         return critter.getStrategy().isStunned();
     }
+
+    public static void initializeArenas() {
+        arenaLevels.put(CritterType.STRENGTH, 1);
+        arenaLevels.put(CritterType.SPEED, 1);
+        arenaLevels.put(CritterType.MAGIC, 1);
+    }
 }
