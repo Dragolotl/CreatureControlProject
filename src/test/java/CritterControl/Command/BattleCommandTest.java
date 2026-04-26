@@ -16,7 +16,7 @@ public class BattleCommandTest {
 
     @Test
     public void testBattleCommand() {
-        Critter critter1 = critterFactory.createCritter(CritterType.STRENGTH, 5);
+        Critter critter1 = critterFactory.createCritter(CritterType.STRENGTH, 1);
 
         CritterCorral corral = new CritterCorral();
 
