@@ -16,7 +16,7 @@ public class CritterCorralTest {
         List<Critter> critters = List.of(
                 critterFactory.createMinitaur("Dave"),
                 critterFactory.createNecroBones("Randy"),
-                critterFactory.createCritterType3("Jorge")
+                critterFactory.createVelociraptor("Jorge")
         );
 
         CritterCorral corral = new CritterCorral(critters);
@@ -28,7 +28,7 @@ public class CritterCorralTest {
         List<Critter> critters = List.of(
                 critterFactory.createMinitaur("Dave"),
                 critterFactory.createNecroBones("Randy"),
-                critterFactory.createCritterType3("Jorge")
+                critterFactory.createVelociraptor("Jorge")
         );
 
         CritterCorral corral = new CritterCorral(critters);
@@ -41,8 +41,8 @@ public class CritterCorralTest {
     public void testReplaceCritter() {
         List<Critter> critters = List.of(
                 critterFactory.createMinitaur("Dave"),
-                critterFactory.createCritterType2("Randy"),
-                critterFactory.createCritterType3("Jorge")
+                critterFactory.createVelociraptor("Randy"),
+                critterFactory.createVelociraptor("Jorge")
         );
 
         CritterCorral corral = new CritterCorral(critters);

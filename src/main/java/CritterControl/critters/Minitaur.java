@@ -2,9 +2,11 @@ package CritterControl.critters;
 
 public class Minitaur extends Critter {
     //Strength Critter
-    public Minitaur(String name, int level) { super(name, level); }
-
-    public Minitaur(String name){ super(name); }
+    public Minitaur(String name){ this(name, 1); }
+    public Minitaur(String name, int level) {
+        super(name, level);
+        critterType = CritterType.STRENGTH;
+    }
 
     @Override
     public void setStrategyBasedOnLevel(int level) {
