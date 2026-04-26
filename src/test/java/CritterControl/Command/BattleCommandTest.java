@@ -20,7 +20,7 @@ public class BattleCommandTest {
 
         CritterCorral corral = new CritterCorral();
 
-        ICommand battle = commandFactory.BattleCommand(critter1, critter1.getLevel(), CritterType.MAGIC, corral);
+        ICommand battle = commandFactory.BattleCommand(critter1, CritterType.MAGIC, corral);
         battle.execute();
     }
 
