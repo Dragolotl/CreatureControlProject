@@ -2,10 +2,9 @@ package CritterControl.Food;
 
 public class Food {
     private final String name;
-    private final Double healthValue;
-    //TODO - IS HAPPINESS STILL A FACTOR IN THE GAME
-    private final Double happinessValue;// can be negative
-    public Food(String name, Double healthValue, Double happinessValue){
+    private final int healthValue;
+    private final int happinessValue;// can be negative
+    public Food(String name, int healthValue, int happinessValue){
         this.name=name;
         this.healthValue=healthValue;
         this.happinessValue=happinessValue;
@@ -13,10 +12,10 @@ public class Food {
     public String getName(){
         return name;
     }
-    public Double getHealthValue(){
+    public int getHealthValue(){
         return healthValue;
     }
-    public Double getHappinessValue(){
+    public int getHappinessValue(){
         return happinessValue;
     }
 }
