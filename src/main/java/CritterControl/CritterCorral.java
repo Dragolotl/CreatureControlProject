@@ -53,13 +53,41 @@ public class CritterCorral {
     public boolean contains(Accessory accessory) { return wardrobe.contains(accessory); }
 
 
-    public Optional<Critter> getCritter(String name) {
+    public Optional<Critter> getCritterByName(String name) {
         return critters.stream().filter(critter -> critter.getName().equals(name)).findFirst();
+    }
+
+    public Critter getCritterByIndex(int index) {
+        if (index < 0 || index >= critters.size()) {
+            return null;
+        } else {
+            return critters.get(index);
+        }
     }
 
     public List<Critter> getCritters() {
         return critters;
     }
 
-    public List<Accessory> getWardrobe() {return wardrobe; }
+    public List<Accessory> getWardrobe() { return wardrobe; }
+
+    public boolean printAllAccessories(){
+        if(wardrobe.isEmpty()){
+            System.out.println("Your wardrobe is empty! Try again when you have accessories.");
+            return false;
+        }else{
+            for (int i = 0; i < wardrobe.size(); i++) {
+                System.out.println((i+1) + ": " + wardrobe.toArray()[i]);
+            }
+            return true;
+        }
+    }
+
+    public Accessory getAccessoryByIndex(int index) {
+        if (index < 0 || index >= wardrobe.size()) {
+            return null;
+        }else{
+            return wardrobe.get(index);
+        }
+    }
 }

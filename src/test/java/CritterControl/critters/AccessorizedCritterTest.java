@@ -2,7 +2,7 @@ package CritterControl.critters;
 
 import CritterControl.Accessories.Accessory;
 import CritterControl.Accessories.AccessoryFactory;
-import CritterControl.Commands.WearCommand;
+import CritterControl.Commands.DressCommand;
 import CritterControl.CritterCorral;
 import org.junit.jupiter.api.Test;
 
@@ -34,11 +34,11 @@ public class AccessorizedCritterTest {
         corral.add(testAccessory);
         assertTrue(corral.contains(critter));
 
-        WearCommand wearCommand = new WearCommand(corral.getCritter("Test Critter").get(), corral, testAccessory);
+        DressCommand wearCommand = new DressCommand(corral.getCritterByName("Test Critter").get(), corral, testAccessory);
         wearCommand.execute();
 
         String expectedName = accessorizedCritter.getName();
-        String actualName = corral.getCritter(expectedName).get().getName();
+        String actualName = corral.getCritterByName(expectedName).get().getName();
 
         assertFalse(corral.contains(critter));
         assertEquals(expectedName, actualName);

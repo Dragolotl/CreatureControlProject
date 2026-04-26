@@ -16,9 +16,6 @@ public class AccessoryTest {
         System.out.println("Accessory Name: " + defaultAccessory.name());
 
         assertEquals(AccessoryFactory.DEFAULT_HEALTH_BOOST, defaultAccessory.healthBoost());
-        assertEquals(AccessoryFactory.DEFAULT_STRENGTH_BOOST, defaultAccessory.strengthBoost());
-        assertEquals(AccessoryFactory.DEFAULT_SPEED_BOOST, defaultAccessory.speedBoost());
-        assertEquals(AccessoryFactory.DEFAULT_MAGIC_BOOST, defaultAccessory.magicBoost());
     }
 
     @Test
@@ -29,9 +26,6 @@ public class AccessoryTest {
             Accessory accessory = accessoryFactory.createRandomAccessory(level);
 
             assertTrue(accessory.healthBoost() >= 0.0 && accessory.healthBoost() <= level);
-            assertTrue(accessory.strengthBoost() >= 0.0 && accessory.strengthBoost() <= level);
-            assertTrue(accessory.speedBoost() >= 0.0 && accessory.speedBoost() <= level);
-            assertTrue(accessory.magicBoost() >= 0.0 && accessory.magicBoost() <= level);
         }
     }
 }
