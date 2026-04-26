@@ -34,7 +34,7 @@ abstract public class Critter {
         this.name = name;
         setHealth(level * LEVEL_HEALTH_MULTIPLIER);
         setHappiness(DEFAULT_HAPPINESS);
-        setStrategyBasedOnLevel(level);
+        setStrategyBasedOnLevel(strategyFactory.BaseStrategy(), strategyFactory.BaseStrategy());
     }
 
     public String getName(){ return name; };
@@ -62,14 +62,14 @@ abstract public class Critter {
         this.die = die;
     }
 
-    abstract public void setStrategyBasedOnLevel(int level);
+//    abstract public void setStrategyBasedOnLevel(int level);
 
 
     public abstract void setStrategy();
 
     protected void setStrategyBasedOnLevel(IStrategy level5Strategy, IStrategy level10Strategy) {
         if (getLevel() < 5) {
-            strategy = strategyFactory.Level1Strategy();
+            strategy = strategyFactory.BaseStrategy();
         } else if (getLevel() < 10) {
             strategy = level5Strategy;
         } else {

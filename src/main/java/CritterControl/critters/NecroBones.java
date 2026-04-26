@@ -9,7 +9,7 @@ public class NecroBones extends Critter {
     @Override
     public void setStrategyBasedOnLevel(int level) {
         if (level < 5) {
-            strategy = strategyFactory.Level1Strategy();
+            strategy = strategyFactory.BaseStrategy();
         } else if (level < 10) {
             strategy = strategyFactory.MinitaurLevel5Strategy();
         } else {

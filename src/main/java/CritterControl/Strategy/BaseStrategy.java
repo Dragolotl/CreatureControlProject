@@ -2,7 +2,7 @@ package CritterControl.Strategy;
 
 import CritterControl.critters.Critter;
 
-public class Level1Strategy implements IStrategy {
+public class BaseStrategy implements IStrategy {
     protected boolean isStunned = false;
     protected boolean dodged = false;
     protected int necrobonesDamageReduction = 0;
