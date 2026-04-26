@@ -21,11 +21,13 @@ public class BattleCommand extends Command{
     private static final int OPPONENT_CHANCE_TO_DODGE = 3;
 
     private final Critter opponent;
+    private final CritterType opponentType
     private final CritterCorral corral;
 
-    public BattleCommand(Critter player, int arenaLevel, CritterType opponentType, CritterCorral corral) {
+    public BattleCommand(Critter player, CritterType opponentType, CritterCorral corral) {
         super(CommandType.BATTLE, player);
-        this.opponent = critterFactory.createCritter(opponentType, arenaLevel);
+        this.opponent = critterFactory.createCritter(opponentType, arenaLevels.get(opponentType));
+        this.opponentType = opponentType;
         this.corral = corral;
     }
 
@@ -40,6 +42,7 @@ public class BattleCommand extends Command{
         if (critter.isAlive()) {
             logger.info("Congratulations! {} won the fight and leveled up!", critter.getName());
             critter.levelUp();
+            arenaLevels.put(opponentType, arenaLevels.get(opponentType) + 1);
             corral.add(accessoryFactory.createRandomAccessory(critter.getLevel()));
         } else {
             logger.info("{} lost the fight. Bummer...", critter.getName());
