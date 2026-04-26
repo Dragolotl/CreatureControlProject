@@ -1,10 +1,11 @@
 package CritterControl.critters;
 
 import CritterControl.Accessories.Accessory;
+import CritterControl.Strategy.IStrategy;
 
 public class AccessorizedCritter extends Critter {
-    private Critter myself;
-    private Accessory accessory;
+    private final Critter myself;
+    private final Accessory accessory;
 
     public AccessorizedCritter(Critter myself, Accessory accessory) {
         this.myself = myself;
@@ -13,16 +14,17 @@ public class AccessorizedCritter extends Critter {
 
     @Override
     public String getName() {
-        return getBaseName() + ", " + accessory.getName();
+        return getBaseName() + ", " + accessory.name();
     }
 
+    @Override
     public String getBaseName() {
         return myself.getName();
     }
 
     @Override
-    public double getHealth() {
-        return myself.getHealth();
+    public int getHealth() {
+        return myself.getHealth() + accessory.healthBoost();
     }
 
     @Override
@@ -31,12 +33,27 @@ public class AccessorizedCritter extends Critter {
     }
 
     @Override
+    public boolean isAlive() {
+        return myself.isAlive();
+    }
+
+    @Override
     public Double getHappiness() {
         return myself.getHappiness();
     }
 
     @Override
-    public void setHealth(Double healthValue) {
+    public Accessory getAccessory () {
+        return accessory;
+    }
+
+    @Override
+    public IStrategy getStrategy () {
+        return myself.getStrategy();
+    }
+
+    @Override
+    public void setHealth(int healthValue) {
         myself.setHealth(healthValue);
     }
 
@@ -45,6 +62,22 @@ public class AccessorizedCritter extends Critter {
         myself.setHappiness(happinessValue);
     }
 
+    @Override
+    public void levelUp() {myself.levelUp();}
 
+    @Override
+    public void setStrategyBasedOnLevel(int level) {
+        myself.setStrategyBasedOnLevel(level);
+    }
+
+    @Override
+    public boolean isAccessorized() {
+        return true;
+    }
+
+    @Override
+    public int checkForTypeAdvantage(Critter opponent) {
+        return myself.checkForTypeAdvantage(opponent);
+    }
 
 }

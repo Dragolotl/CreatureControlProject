@@ -6,16 +6,16 @@ import CritterControl.critters.Critter;
 import CritterControl.critters.CritterFactory;
 import org.slf4j.Logger;
 
-public class WearCommand extends Command {
-    static Logger logger = org.slf4j.LoggerFactory.getLogger(WearCommand.class);
+public class DressCommand extends Command {
+    static Logger logger = org.slf4j.LoggerFactory.getLogger(DressCommand.class);
 
     private final static CritterFactory critterFactory = new CritterFactory();
 
     private final CritterCorral corral;
     private final Accessory accessory;
 
-    public WearCommand(Critter critter, CritterCorral corral, Accessory accessory) {
-        super(CommandType.WEAR, critter);
+    public DressCommand(Critter critter, CritterCorral corral, Accessory accessory) {
+        super(CommandType.DRESS, critter);
         this.corral = corral;
         this.accessory = accessory;
     }
