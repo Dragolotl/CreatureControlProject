@@ -1,12 +1,14 @@
 package CritterControl.Strategy;
 
-import CritterControl.Commands.ICommand;
 import CritterControl.critters.Critter;
 
 public interface IStrategy {
-    void damage(Critter opponent);
-    void dodge(boolean wasAttacked);
+    void tryStun(Critter opponent);
     void setStunned(boolean stunState);
     boolean isStunned();
+    void setDodged(boolean dodged);
+    boolean dodged();
+    int getDamageReduction();
+    void resetDamageReduction();
 }
 
