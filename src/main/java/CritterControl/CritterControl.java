@@ -1,6 +1,5 @@
 package CritterControl;
 
-import CritterControl.Commands.CommandFactory;
 import CritterControl.Commands.CommandType.*;
 import CritterControl.Commands.ICommand;
 import CritterControl.Food.FoodFactory;
@@ -29,7 +28,6 @@ public class CritterControl {
     private final Map<CritterType, Integer> arenaLevels = new ConcurrentHashMap<>();
 //need a scanner
 
-    private CommandFactory commandFactory;
     //include a map that holds arena levels indexed by a possible arena enum
     //need a scanner
     static Logger logger = org.slf4j.LoggerFactory.getLogger(CritterControl.class);
@@ -178,19 +176,10 @@ public class CritterControl {
     public int getGold() {
         return gold;
     }
-    public int getFoodAmount(){
-        return food;
-    }
-    public void addFood(int foodEarned) {
-        food += foodEarned;
-    }
 
-    public void loseFood(int foodLost) {
-        food -= foodLost;
-        if (food <= 0) {
-            food = 0;
-        }
-    }
+
+
+
 
     public void initializeArenas() {
         arenaLevels.put(CritterType.STRENGTH, 1);
