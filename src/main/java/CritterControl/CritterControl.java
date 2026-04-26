@@ -177,12 +177,6 @@ public class CritterControl {
         }
     }
 
-    public void initializeArenas() {
-        arenaLevels.put(CritterType.STRENGTH, 1);
-        arenaLevels.put(CritterType.SPEED, 1);
-        arenaLevels.put(CritterType.MAGIC, 1);
-    }
-
     //have a play method
     //play can be a void method, and a save and quit function at the top menu(
     //Game runs in a while loop, it initializes everything, then it starts a while loop method that presents the plater with options.
