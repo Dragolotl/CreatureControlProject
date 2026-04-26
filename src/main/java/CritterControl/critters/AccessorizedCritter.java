@@ -23,7 +23,7 @@ public class AccessorizedCritter extends Critter {
     }
 
     @Override
-    public double getHealth() {
+    public int getHealth() {
         return myself.getHealth() + accessory.healthBoost();
     }
 
@@ -42,7 +42,6 @@ public class AccessorizedCritter extends Critter {
         return myself.getHappiness();
     }
 
-    @Override
     public Accessory getAccessory () {
         return accessory;
     }
@@ -53,7 +52,7 @@ public class AccessorizedCritter extends Critter {
     }
 
     @Override
-    public void setHealth(Double healthValue) {
+    public void setHealth(int healthValue) {
         myself.setHealth(healthValue);
     }
 
@@ -72,5 +71,9 @@ public class AccessorizedCritter extends Critter {
         return true;
     }
 
+    @Override
+    public int checkForTypeAdvantage(Critter opponent) {
+        return myself.checkForTypeAdvantage(opponent);
+    }
 
 }
