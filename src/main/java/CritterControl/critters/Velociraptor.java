@@ -1,11 +1,12 @@
 package CritterControl.critters;
 
-public class Minitaur extends Critter {
-    //Strength Critter
-    public Minitaur(String name){ this(name, 1); }
-    public Minitaur(String name, int level) {
+public class Velociraptor extends Critter {
+    //Speed Critter
+    public Velociraptor(String name) { this(name, 1); }
+
+    public Velociraptor(String name, int level) {
         super(name, level);
-        critterType = CritterType.STRENGTH;
+        critterType = CritterType.SPEED;
     }
 
     @Override
@@ -13,15 +14,15 @@ public class Minitaur extends Critter {
         if (level < 5) {
             strategy = strategyFactory.Level1Strategy();
         } else if (level < 10) {
-            strategy = strategyFactory.MinitaurLevel5Strategy();
+            strategy = strategyFactory.VelociraptorLevel5Strategy();
         } else {
-            strategy = strategyFactory.MinitaurLevel10Strategy();
+            strategy = strategyFactory.VelociraptorLevel10Strategy();
         }
     }
 
     @Override
     public int checkForTypeAdvantage(Critter opponent) {
-        if (opponent.getCritterType() == CritterType.MAGIC) {
+        if (opponent.getCritterType() == CritterType.STRENGTH) {
             return Critter.TYPE_ADVANTAGE_DAMAGE_BONUS;
         }
 

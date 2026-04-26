@@ -3,10 +3,15 @@ package CritterControl.Commands;
 import CritterControl.Accessories.Accessory;
 import CritterControl.CritterCorral;
 import CritterControl.critters.Critter;
+import CritterControl.critters.CritterType;
 
 public class CommandFactory {
-    public ICommand newWearCommand(Critter critter, CritterCorral corral, Accessory accessory) {
-        return new WearCommand(critter, corral, accessory);
+    public ICommand BattleCommand(Critter critter1, CritterType opponentType, CritterCorral corral) {
+        return new BattleCommand(critter1, opponentType, corral);
+    }
+
+    public ICommand DressCommand(Critter critter, CritterCorral corral, Accessory accessory) {
+        return new DressCommand(critter, corral, accessory);
     }
 
     public ICommand newQuitCommand(Boolean isPlaying) {

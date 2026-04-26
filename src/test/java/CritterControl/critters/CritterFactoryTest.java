@@ -25,8 +25,8 @@ public class CritterFactoryTest {
 
     @Test
     public void testCritterType3() {
-        Critter critter = critterFactory.createCritterType3("placeholder");
-        assertInstanceOf(CritterType3.class, critter);
+        Critter critter = critterFactory.createVelociraptor("placeholder");
+        assertInstanceOf(Velociraptor.class, critter);
     }
 
     @Test

@@ -1,14 +1,18 @@
 package CritterControl.Strategy;
 
-import CritterControl.Commands.ICommand;
 import CritterControl.critters.Critter;
 
 public interface IStrategy {
-    ICommand selectAction(Critter critter);
-    default boolean isFighter() { return false; }
-    default boolean isSeeker() { return false; };
-    default boolean isGuard() { return false; };
-    default boolean isCoward() { return false; };
-    default boolean isGlutton() { return false; };
+    void tryStun(Critter opponent, int inputValue, int stunThreshold);
+    void setStunned(boolean stunState);
+    boolean isStunned();
+    void setDodged(boolean dodged);
+    boolean dodged();
+    int addDodgeDamageBonus();
+    void drain(Critter opponent);
+    int shouldStealEnemyDamage();
+    void increaseCritterDamageReduction();
+    int getDamageReduction();
+    void resetDamageReduction();
 }
 
