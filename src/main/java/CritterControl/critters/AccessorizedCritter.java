@@ -1,11 +1,10 @@
 package CritterControl.critters;
 
 import CritterControl.Accessories.Accessory;
-import CritterControl.Strategy.IStrategy;
 
 public class AccessorizedCritter extends Critter {
-    private final Critter myself;
-    private final Accessory accessory;
+    private Critter myself;
+    private Accessory accessory;
 
     public AccessorizedCritter(Critter myself, Accessory accessory) {
         this.myself = myself;
@@ -14,17 +13,16 @@ public class AccessorizedCritter extends Critter {
 
     @Override
     public String getName() {
-        return getBaseName() + ", " + accessory.name();
+        return getBaseName() + ", " + accessory.getName();
     }
 
-    @Override
     public String getBaseName() {
         return myself.getName();
     }
 
     @Override
     public double getHealth() {
-        return myself.getHealth() + accessory.healthBoost();
+        return myself.getHealth();
     }
 
     @Override
@@ -33,23 +31,8 @@ public class AccessorizedCritter extends Critter {
     }
 
     @Override
-    public boolean isAlive() {
-        return myself.isAlive();
-    }
-
-    @Override
     public Double getHappiness() {
         return myself.getHappiness();
-    }
-
-    @Override
-    public Accessory getAccessory () {
-        return accessory;
-    }
-
-    @Override
-    public IStrategy getStrategy () {
-        return myself.getStrategy();
     }
 
     @Override
@@ -62,15 +45,6 @@ public class AccessorizedCritter extends Critter {
         myself.setHappiness(happinessValue);
     }
 
-    @Override
-    public void setStrategyBasedOnLevel(int level) {
-        myself.setStrategyBasedOnLevel(level);
-    }
-
-    @Override
-    public boolean isAccessorized() {
-        return true;
-    }
 
 
 }

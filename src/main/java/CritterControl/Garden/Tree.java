@@ -35,6 +35,7 @@ public class Tree {
     public void grow(){
         // can make more complex later, maybe each tree has a different amount of turns to grow
         // also can add randomness later
+        growCounter++;
         if (growCounter >= TURNS_TO_GROW) {
             foodGrown += GROWTH_RATE;
             growCounter = 0;

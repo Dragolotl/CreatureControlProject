@@ -1,6 +1,7 @@
 package CritterControl;
 
 import CritterControl.Accessories.Accessory;
+import CritterControl.Accessories.Accessory;
 import CritterControl.Food.Food;
 import CritterControl.critters.Critter;
 
@@ -13,6 +14,7 @@ public class CritterCorral {
     private final List<Critter> critters = new ArrayList<>();
     private final List<Accessory> wardrobe = new ArrayList<>();
     private final List<Food> kitchen = new ArrayList<>();
+
     public CritterCorral() {
 
     }
@@ -44,14 +46,6 @@ public class CritterCorral {
             throw new NoSuchElementException(accessory.name() + "does not exist!");
         }
     }
-    public void remove(Food food){
-        if (contains(food)){
-            kitchen.remove(food);
-        }
-        else {
-            throw new NoSuchElementException(food.getName() + "does not exist");
-        }
-    }
 
     public void replace(Critter originalCritter, Critter newCritter) {
         if (contains(originalCritter)) {
@@ -63,6 +57,21 @@ public class CritterCorral {
     public boolean contains(Critter critter) { return critters.contains(critter); }
     public boolean contains(Accessory accessory) { return wardrobe.contains(accessory); }
     public boolean contains(Food food){return kitchen.contains(food);}
+
+
+
+
+    public void remove(Food food){
+        if (contains(food)){
+            kitchen.remove(food);
+        }
+        else {
+            throw new NoSuchElementException(food.getName() + "does not exist");
+        }
+    }
+
+
+
 
     public Optional<Critter> getCritterByName(String name) {
         return critters.stream().filter(critter -> critter.getName().equals(name)).findFirst();

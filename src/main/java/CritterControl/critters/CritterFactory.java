@@ -3,10 +3,10 @@ package CritterControl.critters;
 import CritterControl.Accessories.Accessory;
 
 public class CritterFactory {
-    protected static final double MINITAUR_DEFAULT_HEALTH = 5.0;
+    protected static final int CRITTER_DEFAULT_HEALTH = 5;
 
     public Critter createMinitaur(String name) {
-        return new Minitaur(name, MINITAUR_DEFAULT_HEALTH);
+        return new Minitaur(name, CRITTER_DEFAULT_HEALTH);
     }
 
     public Critter createNecroBones(String name) {

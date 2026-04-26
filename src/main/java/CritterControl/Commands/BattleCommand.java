@@ -1,5 +1,6 @@
 package CritterControl.Commands;
 
+import CritterControl.Garden.Garden;
 import CritterControl.critters.Critter;
 import org.slf4j.Logger;
 
@@ -15,10 +16,12 @@ public class BattleCommand implements ICommand{
 
     private final Critter player;
     private final Critter opponent;
+    private final Garden garden;
 
-    public BattleCommand(Critter critterInThisCorner, Critter critterInTheOtherCorner) {
+    public BattleCommand(Critter critterInThisCorner, Critter critterInTheOtherCorner, Garden garden) {
         this.player = critterInThisCorner;
         this.opponent = critterInTheOtherCorner;
+        this.garden=garden;
     }
 
     @Override
@@ -28,20 +31,25 @@ public class BattleCommand implements ICommand{
             boolean isPlayerAttacking = getPlayerChoice();
             fight(isPlayerAttacking, randomBattleOpponentChoice());
         }
+        garden.growAllTrees();
         return true;
     }
 
     private void fight(boolean playerAttacked, boolean opponentAttacked) {
         if (playerAttacked && opponentAttacked) {
-            player.getStrategy().damage(opponent);
+            player.damage(opponent);
+            player.getStrategy().setDodged(false);
+            opponent.getStrategy().setDodged(false);
         }
 
         if (!opponentAttacked) {
-            opponent.getStrategy().dodge(playerAttacked);
+            opponent.getStrategy().setDodged(playerAttacked);
+            player.getStrategy().resetDamageReduction();
         }
 
         if (!playerAttacked) {
-            player.getStrategy().dodge(opponentAttacked);
+            player.getStrategy().setDodged(opponentAttacked);
+            opponent.getStrategy().resetDamageReduction();
         }
     }
 

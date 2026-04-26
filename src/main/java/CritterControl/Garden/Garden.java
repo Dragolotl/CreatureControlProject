@@ -1,5 +1,7 @@
 package CritterControl.Garden;
 
+import CritterControl.Food.Food;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,5 +18,13 @@ public class Garden {
             tree.grow();
         }
     }
-    // harvest All Trees too right?
+    public List<Food> harvestAllTrees() {
+        List<Food> foodBasket = new ArrayList<>();
+
+        for (Tree tree : trees) {
+            foodBasket.addAll(tree.harvest());
+        }
+
+        return foodBasket;
+    }
 }
