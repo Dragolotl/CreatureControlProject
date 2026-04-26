@@ -15,6 +15,6 @@ public class Die {
     }
 
     public int roll() {
-        return random.nextInt(6) + 1;
+        return random.nextInt(numSides) + 1;
     }
 }
