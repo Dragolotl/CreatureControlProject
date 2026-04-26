@@ -7,8 +7,10 @@ import CritterControl.critters.CritterFactory;
 import CritterControl.critters.CritterType;
 import org.slf4j.Logger;
 
+import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class BattleCommand extends Command{
     public static final Map<CritterType, Integer> arenaLevels = new ConcurrentHashMap<>();
@@ -21,7 +23,7 @@ public class BattleCommand extends Command{
     private static final int OPPONENT_CHANCE_TO_DODGE = 3;
 
     private final Critter opponent;
-    private final CritterType opponentType
+    private final CritterType opponentType;
     private final CritterCorral corral;
 
     static {

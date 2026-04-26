@@ -1,23 +1,12 @@
 package CritterControl;
 
-import CritterControl.Accessories.Accessory;
 import CritterControl.Commands.CommandFactory;
 import CritterControl.Commands.CommandType.*;
 import CritterControl.Commands.ICommand;
 import CritterControl.critters.Critter;
-import CritterControl.critters.CritterType;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
-import java.util.concurrent.ConcurrentHashMap;
 import org.slf4j.Logger;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.stream.Collectors;
-
 
 public class CritterControl {
     //Might need another class to handle these to be in compliance with Single Responsibility Principle
@@ -48,7 +37,6 @@ public class CritterControl {
     } //Also potentially code in an Arena if we do Ramsey's plan
 
     public void play() {
-        BattleCommand.initializeArenas();
         //Get player choice of critter
         Critter currentCritter = new Critter();
 
@@ -134,7 +122,7 @@ public class CritterControl {
                 //return commandFactory.newWearCommand(currentCritter, corral, corral.getAccessoryByIndex(wardrobeIndex));
             }
         }
-        return commandFactory.newWearCommand(currentCritter, corral, corral.getAccessoryByIndex(wardrobeIndex));
+        return commandFactory.newDressCommand(currentCritter, corral, corral.getAccessoryByIndex(wardrobeIndex));
         // get player choice with scanner (checking valid index)
         // get accessory with player choice
         // return commandFactory.WearCommand(currentCritter, corral, accessory)
