@@ -40,10 +40,12 @@ public class BattleCommand implements ICommand{
 
         if (!opponentAttacked) {
             opponent.getStrategy().setDodged(playerAttacked);
+            player.getStrategy().resetDamageReduction();
         }
 
         if (!playerAttacked) {
             player.getStrategy().setDodged(opponentAttacked);
+            opponent.getStrategy().resetDamageReduction();
         }
     }
 
