@@ -33,15 +33,17 @@ public class BattleCommand implements ICommand{
 
     private void fight(boolean playerAttacked, boolean opponentAttacked) {
         if (playerAttacked && opponentAttacked) {
-            player.getStrategy().damage(opponent);
+            player.damage(opponent);
+            player.getStrategy().setDodged(false);
+            opponent.getStrategy().setDodged(false);
         }
 
         if (!opponentAttacked) {
-            opponent.getStrategy().dodge(playerAttacked);
+            opponent.getStrategy().setDodged(playerAttacked);
         }
 
         if (!playerAttacked) {
-            player.getStrategy().dodge(opponentAttacked);
+            player.getStrategy().setDodged(opponentAttacked);
         }
     }
 
