@@ -1,97 +1,70 @@
 package CritterControl.Commands;
 
-import CritterControl.Accessories.AccessoryFactory;
-import CritterControl.CritterCorral;
+import CritterControl.Garden.Garden;
 import CritterControl.critters.Critter;
-import CritterControl.critters.CritterFactory;
-import CritterControl.critters.CritterType;
 import org.slf4j.Logger;
 
-import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.concurrent.ConcurrentHashMap;
 
-public class BattleCommand extends Command{
-    public static final Map<CritterType, Integer> arenaLevels = new ConcurrentHashMap<>();
+public class BattleCommand implements ICommand{
     private static final Scanner scanner = new Scanner(System.in);
     private static final Logger logger = org.slf4j.LoggerFactory.getLogger(BattleCommand.class);
-    private static final CritterFactory  critterFactory = new CritterFactory();
-    private static final AccessoryFactory accessoryFactory = new AccessoryFactory();
     private static final Random random = new Random();
 
     private static final int OPPONENT_CHANCE_TO_DODGE = 3;
 
+    private final Critter player;
     private final Critter opponent;
-    private final CritterType opponentType;
-    private final CritterCorral corral;
+    private final Garden garden;
 
-    static {
-        initializeArenas();
-    }
-
-    public BattleCommand(Critter player, CritterType opponentType, CritterCorral corral) {
-        super(CommandType.BATTLE, player);
-        this.opponent = critterFactory.createCritter(opponentType, arenaLevels.get(opponentType));
-        this.opponentType = opponentType;
-        this.corral = corral;
+    public BattleCommand(Critter critterInThisCorner, Critter critterInTheOtherCorner, Garden garden) {
+        this.player = critterInThisCorner;
+        this.opponent = critterInTheOtherCorner;
+        this.garden=garden;
     }
 
     @Override
     public boolean execute() {
-        logger.info("{} vs. {}... FIGHT!", critter.getName(), opponent.getName());
-        while (critter.isAlive() && opponent.isAlive()) {
+        logger.info("{} vs. {}... FIGHT!", player.getName(), opponent.getName());
+        while (player.isAlive() && opponent.isAlive()) {
             boolean isPlayerAttacking = getPlayerChoice();
             fight(isPlayerAttacking, randomBattleOpponentChoice());
         }
-
-        if (critter.isAlive()) {
-            logger.info("Congratulations! {} won the fight and leveled up!", critter.getName());
-            critter.levelUp();
-            arenaLevels.put(opponentType, arenaLevels.get(opponentType) + 1);
-            corral.add(accessoryFactory.createRandomAccessory(critter.getLevel()));
-        } else {
-            logger.info("{} lost the fight. Bummer...", critter.getName());
-        }
-
+        garden.growAllTrees();
         return true;
     }
 
     private void fight(boolean playerAttacked, boolean opponentAttacked) {
         if (playerAttacked && opponentAttacked) {
-            critter.damage(opponent);
-            critter.getStrategy().setDodged(false);
+            player.damage(opponent);
+            player.getStrategy().setDodged(false);
             opponent.getStrategy().setDodged(false);
         }
 
         if (!opponentAttacked) {
             opponent.getStrategy().setDodged(playerAttacked);
-            critter.getStrategy().resetDamageReduction();
-            logger.info("{} dodged!.", opponent.getName());
+            player.getStrategy().resetDamageReduction();
         }
 
         if (!playerAttacked) {
-            critter.getStrategy().setDodged(opponentAttacked);
+            player.getStrategy().setDodged(opponentAttacked);
             opponent.getStrategy().resetDamageReduction();
-            logger.info("{} dodged!.", critter.getName());
         }
     }
 
     private boolean getPlayerChoice() {
         int playerChoice;
 
-        if (checkForStunned(critter)) {
-            logger.info("You are stunned and can't act!");
+        if (checkForStunned(player)) {
+            logger.info("You are stunned and can't attack!");
             return true;
         }
 
         while (true) {
             logger.info("Make your choice:");
-            logger.info("1. ATTACK");
-            logger.info("2. DODGE");
-            playerChoice = random.nextInt(2) + 1;
-//            Scanner scanner = new Scanner(System.in);
-//            playerChoice = Integer.parseInt(scanner.nextLine());
+            logger.info("1. ATTACK\n2. DODGE");
+            playerChoice = scanner.nextInt();
             if (playerChoice < 1 || playerChoice > 2) {
                 logger.warn("Invalid choice.");
             } else {
@@ -105,16 +78,10 @@ public class BattleCommand extends Command{
             return true;
         }
 
-        return !(random.nextInt(OPPONENT_CHANCE_TO_DODGE) == 0);
+        return random.nextInt(OPPONENT_CHANCE_TO_DODGE) == 0;
     }
 
     private boolean checkForStunned(Critter critter) {
         return critter.getStrategy().isStunned();
-    }
-
-    public static void initializeArenas() {
-        arenaLevels.put(CritterType.STRENGTH, 1);
-        arenaLevels.put(CritterType.SPEED, 1);
-        arenaLevels.put(CritterType.MAGIC, 1);
     }
 }

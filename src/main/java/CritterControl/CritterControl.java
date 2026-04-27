@@ -1,9 +1,14 @@
 package CritterControl;
 
-import CritterControl.Commands.CommandFactory;
 import CritterControl.Commands.CommandType.*;
 import CritterControl.Commands.ICommand;
+import CritterControl.Food.FoodFactory;
+import CritterControl.Food.FoodType;
+import CritterControl.Garden.Garden;
+import CritterControl.Garden.Tree;
 import CritterControl.critters.Critter;
+import CritterControl.critters.CritterFactory;
+import CritterControl.critters.CritterType;
 
 import java.util.Scanner;
 import org.slf4j.Logger;
@@ -11,12 +16,18 @@ import org.slf4j.Logger;
 public class CritterControl {
     //Might need another class to handle these to be in compliance with Single Responsibility Principle
     //CritterControl should handle playing the game
-    private Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
     private int gold;
-    private int food;
     private Boolean playing;
+
     private final CritterCorral corral;
-    private CommandFactory commandFactory;
+    private final Garden garden;
+    private final FoodFactory foodFactory;
+    private final CritterFactory critterFactory;
+
+    private final Map<CritterType, Integer> arenaLevels = new ConcurrentHashMap<>();
+//need a scanner
+
     //include a map that holds arena levels indexed by a possible arena enum
     //need a scanner
     static Logger logger = org.slf4j.LoggerFactory.getLogger(CritterControl.class);
@@ -24,16 +35,30 @@ public class CritterControl {
 
     public CritterControl() {
         this.gold = 0;
-        this.food = 0;
         this.corral = new CritterCorral();
         this.playing = true;
+        this.garden = new Garden();
+        this.foodFactory = new FoodFactory(new Die(20));
+        this.critterFactory = new CritterFactory();
+        garden.addTree(new Tree(
+                FoodType.APPLE.getTreeName(),
+                FoodType.APPLE.createFood(),
+                foodFactory)); // need to fix new keyword here
     }
 
     public CritterControl(CritterCorral corral) {
         //Give player starting stuff
         this.gold = 0;
-        this.food = 0;
+        this.playing = true;
         this.corral = corral;
+        this.garden = new Garden();
+        this.foodFactory = new FoodFactory(new Die(20));
+        this.critterFactory = new CritterFactory();
+        garden.addTree(new Tree(
+                FoodType.APPLE.getTreeName(),
+                FoodType.APPLE.createFood(),
+                foodFactory)); // need to fix new keyword here
+
     } //Also potentially code in an Arena if we do Ramsey's plan
 
     public void play() {
@@ -151,18 +176,31 @@ public class CritterControl {
     public int getGold() {
         return gold;
     }
-    public int getFoodAmount(){
-        return food;
-    }
-    public void addFood(int foodEarned) {
-        food += foodEarned;
+
+
+
+
+
+    public void initializeArenas() {
+        arenaLevels.put(CritterType.STRENGTH, 1);
+        arenaLevels.put(CritterType.SPEED, 1);
+        arenaLevels.put(CritterType.MAGIC, 1);
     }
 
-    public void loseFood(int foodLost) {
-        food -= foodLost;
-        if (food <= 0) {
-            food = 0;
+
+    public boolean buyTree(FoodType foodType) {
+        if (gold < foodType.getCost()) {
+            return false;
         }
+
+        garden.addTree(new Tree(
+                foodType.getTreeName(),
+                foodType.createFood(),
+                foodFactory
+        )); // is this new keyword okay? i can't think of something better
+
+        loseGold(foodType.getCost());
+        return true;
     }
 
     //have a play method

@@ -1,24 +1,21 @@
 package CritterControl.critters;
 
-import CritterControl.Accessories.Accessory;
 import CritterControl.Die;
 import CritterControl.Food.Food;
 import CritterControl.Strategy.IStrategy;
 import CritterControl.Strategy.StrategyFactory;
-import org.slf4j.Logger;
 
 abstract public class Critter {
-    static Logger logger = org.slf4j.LoggerFactory.getLogger(Critter.class);
     protected static final StrategyFactory strategyFactory = new StrategyFactory();
 
-    public static final int TYPE_ADVANTAGE_DAMAGE_BONUS = 1;
+    public static final int TYPE_ADVANTAGE_DAMAGE_BONUS = 2;
     protected static final double DEFAULT_HAPPINESS=100.0;
     protected static final int LEVEL_HEALTH_MULTIPLIER = 5;
     protected String name;
     private int health;
     private int level;
     private Double happiness; //TODO - IS HAPPINESS STILL A FACTOR IN THIS GAME?
-    protected CritterType critterType;
+    private CritterType critterType;
     private Die die;
 
     protected IStrategy strategy;
@@ -35,11 +32,9 @@ abstract public class Critter {
 
     public Critter(String name, int level, Die die) {
         this.name = name;
-        this.level = level;
-        this.die = die;
         setHealth(level * LEVEL_HEALTH_MULTIPLIER);
         setHappiness(DEFAULT_HAPPINESS);
-        setStrategyBasedOnLevel(level);
+        setStrategyBasedOnLevel(strategyFactory.BaseStrategy(), strategyFactory.BaseStrategy());
     }
 
     public String getName(){ return name; };
@@ -67,17 +62,25 @@ abstract public class Critter {
         this.die = die;
     }
 
-    public void levelUp() {
-        level++;
-        setStrategyBasedOnLevel(getLevel());
-    }
+//    abstract public void setStrategyBasedOnLevel(int level);
 
-    abstract public void setStrategyBasedOnLevel(int level);
+
+    public abstract void setStrategy();
+
+    protected void setStrategyBasedOnLevel(IStrategy level5Strategy, IStrategy level10Strategy) {
+        if (getLevel() < 5) {
+            strategy = strategyFactory.BaseStrategy();
+        } else if (getLevel() < 10) {
+            strategy = level5Strategy;
+        } else {
+            strategy = level10Strategy;
+        }
+    }
 
     //Is this how eating works with the game as it is?
     //TODO - DECIDE HOW EAT SHOULD WORK
     public void eat(Food food){
-//        addHealth(food.getHealthValue());
+        addHealth(food.getHealthValue());
         setHappiness(getHappiness() + food.getHappinessValue());
     }
 
@@ -105,16 +108,11 @@ abstract public class Critter {
         return false;
     }
 
-    public Accessory getAccessory() {
-        return null;
-    }
-
     //TODO - Not sure if calc is correct but maybe...
     public void damage(Critter opponent) {
         //If stunned, cut result in half
         int playerResult = getDie().roll();
-        logger.info("{}, ({}) rolled a {}", getName() ,getHealth(), playerResult);
-        getStrategy().tryStun(opponent, playerResult, Die.DEFAULT_MAX_VALUE);
+        getStrategy().tryStun(opponent, playerResult, getDie().getNumSides());
 
         if (getStrategy().isStunned()) {
             playerResult /= 2;
@@ -122,31 +120,28 @@ abstract public class Critter {
         }
 
         int opponentResult = opponent.getDie().roll();
-        logger.info("{}, ({}) rolled a {}", opponent.getName(), opponent.getHealth(), opponentResult);
-        opponent.getStrategy().tryStun(this, opponentResult, Die.DEFAULT_MAX_VALUE);
+        opponent.getStrategy().tryStun(this, opponentResult, opponent.getDie().getNumSides());
         if (opponent.getStrategy().isStunned()) {
             opponentResult /= 2;
             opponent.getStrategy().setStunned(false);
         }
 
         //Total result = initial roll + type advantage damage bonus + stolen damage (if high level magic type)
-        playerResult += checkForTypeAdvantage(opponent)
+        playerResult = Math.max(0, playerResult
+                + checkForTypeAdvantage(opponent)
                 + (getStrategy().shouldStealEnemyDamage() * opponent.getStrategy().getDamageReduction())
                 + getStrategy().addDodgeDamageBonus()
-                - getStrategy().getDamageReduction();
-        opponentResult += checkForTypeAdvantage(this)
+                - getStrategy().getDamageReduction());
+        opponentResult = Math.max(0, opponentResult
+                + checkForTypeAdvantage(this)
                 + (getStrategy().shouldStealEnemyDamage() * getStrategy().getDamageReduction())
                 + getStrategy().addDodgeDamageBonus()
-                - opponent.getStrategy().getDamageReduction();
+                - opponent.getStrategy().getDamageReduction());
 
         if (playerResult > opponentResult) {
-            logger.info("{} dealt {} damage to {}", getName(), playerResult - opponentResult, opponent.getName());
             opponent.loseHealth(playerResult - opponentResult);
-        } else if (playerResult < opponentResult) {
-            logger.info("{} dealt {} damage to {}", opponent.getName(), opponentResult - playerResult, getName());
-            loseHealth(opponentResult -  playerResult);
         } else {
-            logger.info("Clash! No damage dealt...");
+            loseHealth(opponentResult -  playerResult);
         }
 
         getStrategy().drain(opponent);

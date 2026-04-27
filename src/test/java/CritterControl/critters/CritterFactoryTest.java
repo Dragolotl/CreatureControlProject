@@ -34,4 +34,10 @@ public class CritterFactoryTest {
         Critter critter = critterFactory.createCritter(MAGIC);
         assertInstanceOf(NecroBones.class, critter);
     }
+
+    @Test
+    public void testMakeCritterOfTypeMagic(){
+        Critter critter = critterFactory.createCritter(MAGIC);
+        assertInstanceOf(NecroBones.class, critter);
+    }
 }

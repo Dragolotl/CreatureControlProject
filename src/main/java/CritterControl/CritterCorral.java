@@ -1,6 +1,8 @@
 package CritterControl;
 
 import CritterControl.Accessories.Accessory;
+import CritterControl.Accessories.Accessory;
+import CritterControl.Food.Food;
 import CritterControl.critters.Critter;
 
 import java.util.ArrayList;
@@ -11,6 +13,7 @@ import java.util.Optional;
 public class CritterCorral {
     private final List<Critter> critters = new ArrayList<>();
     private final List<Accessory> wardrobe = new ArrayList<>();
+    private final List<Food> kitchen = new ArrayList<>();
 
     public CritterCorral() {
     }
@@ -25,6 +28,7 @@ public class CritterCorral {
         critters.add(critter);
     }
     public void add(Accessory accessory) { wardrobe.add(accessory); }
+    public void add(Food food){ kitchen.add(food);}
 
     public void remove(Critter critter) {
         if (contains(critter)) {
@@ -51,6 +55,21 @@ public class CritterCorral {
 
     public boolean contains(Critter critter) { return critters.contains(critter); }
     public boolean contains(Accessory accessory) { return wardrobe.contains(accessory); }
+    public boolean contains(Food food){return kitchen.contains(food);}
+
+
+
+
+    public void remove(Food food){
+        if (contains(food)){
+            kitchen.remove(food);
+        }
+        else {
+            throw new NoSuchElementException(food.getName() + "does not exist");
+        }
+    }
+
+
 
 
     public Optional<Critter> getCritterByName(String name) {

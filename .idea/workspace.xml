@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0cce6c91-d63d-4c5e-8827-e9e9c62897f1" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/CritterControl/Accessories/AccessoryFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/CritterControl/Commands/BattleCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/CritterControl/Commands/CommandType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/CritterControl/Commands/QuitCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/CritterControl/Commands/WearCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/CritterControl/Die.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/CritterControl/Food/DecoratedFood.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/CritterControl/Food/GoldenFood.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/CritterControl/Garden/Garden.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/CritterControl/Garden/Tree.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/CritterControl/Strategy/Level1Strategy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/CritterControl/critters/CritterType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/CritterControl/critters/NecroBones.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/CritterControl/Accessory/AccessoryTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/CritterControl/Arena/ArenaTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/CritterControl/critters/AccessorizedCritterTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/features/AdvancedBattle.feature" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/features/BeatArena.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CritterControl/Accessories/Accessory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CritterControl/Accessories/Accessory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CritterControl/Arena.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CritterControl/Arena/Arena.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CritterControl/Commands/CommandFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CritterControl/Commands/CommandFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CritterControl/Commands/FeedCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CritterControl/Commands/FeedCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CritterControl/CritterControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CritterControl/CritterControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CritterControl/CritterCorral.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CritterControl/CritterCorral.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CritterControl/Food/Food.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CritterControl/Food/Food.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CritterControl/Strategy/Critter1Level1Strategy.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CritterControl/Strategy/CritterStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CritterControl/Strategy/CritterStrategy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CritterControl/Strategy/IStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CritterControl/Strategy/IStrategy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CritterControl/critters/AccessorizedCritter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CritterControl/critters/AccessorizedCritter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CritterControl/critters/Critter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CritterControl/critters/Critter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CritterControl/critters/CritterFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CritterControl/critters/CritterFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CritterControl/critters/Minitaur.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CritterControl/critters/Minitaur.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CritterControl/critters/SpeedyCritter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/CritterControl/CritterCorralTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/CritterControl/CritterCorralTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/CritterControl/critters/CritterFactoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/CritterControl/critters/CritterFactoryTest.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "git-widget-placeholder": "bDraft"
+  }
+}]]></component>
+  <component name="TaskManager">
+    <servers />
+  </component>
+</project>
