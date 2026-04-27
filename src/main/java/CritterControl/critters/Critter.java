@@ -1,11 +1,12 @@
 package CritterControl.critters;
 
+import CritterControl.Accessories.Accessory;
 import CritterControl.Die;
 import CritterControl.Food.Food;
 import CritterControl.Strategy.IStrategy;
 import CritterControl.Strategy.StrategyFactory;
 
-abstract public class Critter {
+public abstract class Critter {
     protected static final StrategyFactory strategyFactory = new StrategyFactory();
 
     public static final int TYPE_ADVANTAGE_DAMAGE_BONUS = 2;
@@ -62,7 +63,7 @@ abstract public class Critter {
         this.die = die;
     }
 
-//    abstract public void setStrategyBasedOnLevel(int level);
+    abstract public void setStrategyBasedOnLevel(int level);
 
 
     public abstract void setStrategy();
@@ -149,6 +150,8 @@ abstract public class Critter {
     }
 
     abstract public int checkForTypeAdvantage(Critter opponent);
+
+    public Accessory getAccessory(){return null; }//THIS IS MOSTLY HERE FOR TESTING, WE CAN TRY OTHER THINGS WITH IT LATER
 
 //    public void getArenaStage(String arenaType) { //This might be something we delete
 //        arenaLevel.get(arenaType);

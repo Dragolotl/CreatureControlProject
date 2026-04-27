@@ -7,7 +7,12 @@ public class NecroBones extends Critter {
     public NecroBones(String name) { this(name, 1); }
     public NecroBones(String name, int level) {
         super(name, level);
-        critterType = CritterType.MAGIC;
+        //critterType = CritterType.MAGIC;
+    }
+
+    @Override
+    public void setStrategy() {
+        setStrategyBasedOnLevel(strategyFactory.NecroBonesLevel5Strategy(), strategyFactory.NecroBonesLevel10Strategy());
     }
 
     @Override

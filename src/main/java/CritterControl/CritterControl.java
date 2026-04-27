@@ -1,6 +1,5 @@
 package CritterControl;
 
-import CritterControl.Commands.CommandType.*;
 import CritterControl.Commands.ICommand;
 import CritterControl.Food.FoodFactory;
 import CritterControl.Food.FoodType;
@@ -10,7 +9,6 @@ import CritterControl.critters.Critter;
 import CritterControl.critters.CritterFactory;
 import CritterControl.critters.CritterType;
 import CritterControl.Commands.CommandFactory;
-import CritterControl.Commands.*;
 
 import java.util.Map;
 import java.util.Scanner;
@@ -71,8 +69,31 @@ public class CritterControl {
 
     public void play() {
         //Get player choice of critter
-        Critter currentCritter = new Critter();
+        Critter currentCritter = null;
+        logger.info("Select Critter: ");
+        Scanner scanner = new Scanner(System.in);
+        for(int i = 0; i< corral.getCritters().size(); i++){
+            logger.info(corral.getCritters().get(i).getName());
+        }
+        int critterIndex = 0;
+        boolean chooseOption = true;
+        while(chooseOption){
+            critterIndex = scanner.nextInt();
+            if(critterIndex >= 0 && critterIndex < corral.getCritters().size()){
+                logger.info("You have chosen Critter {}!", corral.getCritterByIndex(critterIndex).getName());
+                currentCritter = corral.getCritterByIndex(critterIndex);
+                chooseOption = false;
+            }else{
+                logger.info("{} is out of bounds. Choose a valid Critter. Printing again.", critterIndex);
+                for(int i = 0; i < corral.getCritters().size(); i++){
+                    logger.info(corral.getCritters().get(i).getName());
+                }
+                break;
+            }
+        }
 
+        assert currentCritter != null; //Might get rid of this assert statement, we'll see
+        logger.info("Interact with {}!", currentCritter.getName());
         while (playing) {
             //Print menu somehow
             //could select a current critter in here rather than selectAction?
@@ -93,12 +114,13 @@ public class CritterControl {
             case 1:
                 //1. Change Critter (not a command, just variable swapping)
                 // Could have a function in critterCorral to iterate through the list
-                logger.info("Choose different Critter: ");
+                logger.info("Choose different Critter: --IN PROGRESS--");
                 //      print out critter list from corral
                 //      scan to get user choice
                 //      currentCritter = corral.get(userChoice);
                 //somehow pull player out of this selectAction and put them in a new one - potentially put this in play?
                 //      return commandFactory.SleepCommand();
+                break;
             case 2:
                 //2. Battle
                 //      print out arenas
