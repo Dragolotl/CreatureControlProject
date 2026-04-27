@@ -58,8 +58,6 @@ public class CritterCorral {
     public boolean contains(Food food){return kitchen.contains(food);}
 
 
-
-
     public void remove(Food food){
         if (contains(food)){
             kitchen.remove(food);
@@ -68,8 +66,6 @@ public class CritterCorral {
             throw new NoSuchElementException(food.getName() + "does not exist");
         }
     }
-
-
 
 
     public Optional<Critter> getCritterByName(String name) {
@@ -107,6 +103,30 @@ public class CritterCorral {
             return null;
         }else{
             return wardrobe.get(index);
+        }
+    }
+
+    public List<Food> getKitchen(){
+        return kitchen;
+    }
+
+    public boolean printAllFood(){
+        if(kitchen.isEmpty()){
+            System.out.println("Your kitchen is empty! Try again when you get food.");
+            return false;
+        }else{
+            for (int i = 0; i < kitchen.size(); i++) {
+                System.out.println((i+1) + ": " + kitchen.toArray()[i]);
+            }
+            return true;
+        }
+    }
+
+    public Food getFoodByIndex(int index) {
+        if (index < 0 || index >= kitchen.size()) {
+            return null;
+        }else{
+            return kitchen.get(index);
         }
     }
 }
