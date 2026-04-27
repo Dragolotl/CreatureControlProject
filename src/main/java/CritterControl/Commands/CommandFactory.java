@@ -21,10 +21,6 @@ public class CommandFactory {
         return new DressCommand(critter, corral, accessory);
     }
 
-    public ICommand newQuitCommand(Boolean isPlaying) {
-        return new QuitCommand(isPlaying);
-    }
-}
     public ICommand newFeedCommand(Critter critter, Food food, CritterCorral corral) {
         return new FeedCommand(critter, food, corral);
     }

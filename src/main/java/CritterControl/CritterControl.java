@@ -224,7 +224,7 @@ public class CritterControl {
                 break;
             }
         }
-        return commandFactory.newFeedCommand(currentCritter, corral.getKitchen().get(foodIndex));
+        return commandFactory.newFeedCommand(currentCritter, corral.getKitchen().get(foodIndex), corral);
     }
 
     public void addGold(int goldEarned) {
