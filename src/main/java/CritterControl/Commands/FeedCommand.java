@@ -1,16 +1,25 @@
 package CritterControl.Commands;
 
+import CritterControl.CritterCorral;
+import CritterControl.Food.Food;
 import CritterControl.critters.Critter;
 
 public class FeedCommand extends Command{
+    private final Food food;
+    private final CritterCorral corral;
 
-    //food object? This will probably interact with one specific food rather than the whole garden
-    public FeedCommand(Critter critter) { //possibly have a parameter for garden? Will Garden be its own thing or part of the CritterCorral?
+    public FeedCommand(Critter critter, Food food, CritterCorral corral) {
         super(CommandType.FEED, critter);
+        this.food=food;
+        this.corral=corral;
     }
 
     public boolean execute() {
+        if (food==null){
         return false;
-        //have access to garden, pick food and feed it to creature-is this too much in one command?
+        }
+        critter.eat(food);
+        corral.remove(food);
+        return true;
     }
 }

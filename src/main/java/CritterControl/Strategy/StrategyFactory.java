@@ -1,8 +1,8 @@
 package CritterControl.Strategy;
 
 public class StrategyFactory {
-    public IStrategy Level1Strategy() {
-        return new Level1Strategy();
+    public IStrategy BaseStrategy() {
+        return new BaseStrategy();
     }
 
     public IStrategy MinitaurLevel5Strategy() {

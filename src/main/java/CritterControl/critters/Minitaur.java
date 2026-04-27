@@ -1,23 +1,21 @@
 package CritterControl.critters;
 
+import CritterControl.Strategy.IStrategy;
+
 public class Minitaur extends Critter {
     //Strength Critter
-    public Minitaur(String name){ this(name, 1); }
     public Minitaur(String name, int level) {
         super(name, level);
-        critterType = CritterType.STRENGTH;
+    }
+
+    public Minitaur(String name){
+        super(name);
     }
 
     @Override
-    public void setStrategyBasedOnLevel(int level) {
-        if (level < 5) {
-            strategy = strategyFactory.Level1Strategy();
-        } else if (level < 10) {
-            strategy = strategyFactory.MinitaurLevel5Strategy();
-        } else {
-            strategy = strategyFactory.MinitaurLevel10Strategy();
-        }
-    }
+    public void setStrategy() {
+        setStrategyBasedOnLevel(strategyFactory.MinitaurLevel5Strategy(), strategyFactory.MinitaurLevel10Strategy() ); }
+
 
     @Override
     public int checkForTypeAdvantage(Critter opponent) {

@@ -2,13 +2,12 @@ package CritterControl.Strategy;
 
 import CritterControl.critters.Critter;
 
-public class Level1Strategy implements IStrategy {
-    protected static final int MAX_DAMAGE_REDUCTION = 3;
+public class BaseStrategy implements IStrategy {
     protected boolean isStunned = false;
     protected boolean dodged = false;
     protected int necrobonesDamageReduction = 0;
 
-    public void tryStun(Critter opponent, int inputValue, int stunThreshold) {}
+    public void tryStun(Critter opponent, int inputValue, int stunThreshold) { opponent.getStrategy().setStunned(false); }
     public void setStunned(boolean stunned) {isStunned = stunned;}
     public boolean isStunned() { return isStunned; }
     public void setDodged(boolean wasAttacked) { dodged = wasAttacked; }
