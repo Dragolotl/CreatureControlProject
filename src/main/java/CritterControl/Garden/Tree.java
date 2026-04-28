@@ -16,12 +16,11 @@ public class Tree {
     private final Food foodType;
     private int growCounter = 0;
     private int foodGrown = 0; // all trees start with no food
-    private final FoodFactory foodFactory;
+    private static final FoodFactory foodFactory = new FoodFactory();
 
-    public Tree(String name, Food foodType, FoodFactory foodFactory){
+    public Tree(String name, Food foodType){
         this.name=name;
         this.foodType=foodType;
-        this.foodFactory=foodFactory;
     }
 
     public String getName(){

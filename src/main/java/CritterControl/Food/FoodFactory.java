@@ -6,7 +6,11 @@ public class FoodFactory {
     private static final int DEFAULT_DIE_SIZE = 20;
     private static final Die die = new Die(DEFAULT_DIE_SIZE);
 
-    public Food createFood(Food baseFood) {
+    public Food createFood(FoodType type){
+        Food baseFood = type.createFood();
+        return createDecoratedFood(baseFood);
+    }
+    private Food createDecoratedFood(Food baseFood) {
         int roll = die.roll();
 
         if (roll == 20) {
