@@ -3,12 +3,8 @@ package CritterControl.Food;
 import CritterControl.Die;
 
 public class FoodFactory {
-    private final Die die;
-
-    // should use a D20
-    public FoodFactory(Die die) {
-        this.die = die;
-    }
+    private static final int DEFAULT_DIE_SIZE = 20;
+    private static final Die die = new Die(DEFAULT_DIE_SIZE);
 
     public Food createFood(Food baseFood) {
         int roll = die.roll();

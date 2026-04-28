@@ -7,7 +7,7 @@ public class BaseStrategy implements IStrategy {
     protected boolean dodged = false;
     protected int necrobonesDamageReduction = 0;
 
-    public void tryStun(Critter opponent, int inputValue, int stunThreshold) { opponent.getStrategy().setStunned(false); }
+    public void tryStun(Critter opponent, int inputValue, int stunThreshold) {}
     public void setStunned(boolean stunned) {isStunned = stunned;}
     public boolean isStunned() { return isStunned; }
     public void setDodged(boolean wasAttacked) { dodged = wasAttacked; }

@@ -1,15 +1,13 @@
 package CritterControl.critters;
 
-import CritterControl.Strategy.IStrategy;
-
 public class Velociraptor extends Critter {
-    //Implementation TBD
+    //SPEED CRITTER
+    public Velociraptor(String name){ this(name, 1); }
     public Velociraptor(String name, int level) {
         super(name,level);
+        this.critterType = CritterType.SPEED;
     }
 
-
-    public Velociraptor(String name){super(name);}
     @Override
     public void setStrategy() {
         setStrategyBasedOnLevel(strategyFactory.VelociraptorLevel5Strategy(), strategyFactory.VelociraptorLevel10Strategy() );
@@ -17,8 +15,10 @@ public class Velociraptor extends Critter {
 
     @Override
     public int checkForTypeAdvantage(Critter opponent) {
+        if (opponent.getCritterType() == CritterType.STRENGTH) {
+            return Critter.TYPE_ADVANTAGE_DAMAGE_BONUS;
+        }
+
         return 0;
     }
-
-
 }

@@ -11,15 +11,8 @@ public class NecroBones extends Critter {
     }
 
     @Override
-    public void setStrategyBasedOnLevel(int level) {
-        if (level < 5) {
-            strategy = strategyFactory.BaseStrategy();
-        } else if (level < 10) {
-            strategy = strategyFactory.NecroBonesLevel5Strategy();
-            setDie(new Die(4));
-        } else {
-            strategy = strategyFactory.NecroBonesLevel10Strategy();
-        }
+    public void setStrategy() {
+        setStrategyBasedOnLevel(strategyFactory.NecroBonesLevel5Strategy(), strategyFactory.NecroBonesLevel10Strategy() );
     }
 
     @Override

@@ -63,11 +63,11 @@ public class AccessorizedCritter extends Critter {
     }
 
     @Override
-    public void levelUp() {myself.levelUp();}
+    public void levelUp() { myself.levelUp(); }
 
     @Override
-    public void setStrategyBasedOnLevel(int level) {
-        myself.setStrategyBasedOnLevel(level);
+    public void setStrategy() {
+        myself.setStrategy();
     }
 
     @Override

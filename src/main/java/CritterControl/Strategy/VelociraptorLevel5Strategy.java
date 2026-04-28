@@ -1,6 +1,6 @@
 package CritterControl.Strategy;
 
-public class VelociraptorLevel5Strategy extends Level1Strategy {
+public class VelociraptorLevel5Strategy extends BaseStrategy {
     public static final int DODGE_DAMAGE_BONUS = 1;
 
     @Override
