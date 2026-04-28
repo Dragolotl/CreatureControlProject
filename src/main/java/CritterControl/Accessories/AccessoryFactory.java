@@ -15,35 +15,22 @@ public class AccessoryFactory {
 
     public static final int DEFAULT_LEVEL = 0;
     public static final int DEFAULT_HEALTH_BOOST = 0;
-    public static final int DEFAULT_STRENGTH_BOOST = 0;
-    public static final int DEFAULT_SPEED_BOOST = 0;
-    public static final int DEFAULT_MAGIC_BOOST = 0;
 
-    public Accessory createAccessory(int level, int healthBoost, int strengthBoost, int speedBoost, int magicBoost) {
+    public Accessory createAccessory(int level, int healthBoost) {
         String name = generateRandomNameBasedOnLevel(level);
-        return new Accessory(name, healthBoost, strengthBoost, speedBoost, magicBoost);
+        return new Accessory(name, healthBoost);
     }
 
     public Accessory createDefaultAccessory() {
-        return createAccessory(DEFAULT_LEVEL, DEFAULT_HEALTH_BOOST, DEFAULT_STRENGTH_BOOST, DEFAULT_SPEED_BOOST, DEFAULT_MAGIC_BOOST);
+        return createAccessory(DEFAULT_LEVEL, DEFAULT_HEALTH_BOOST);
     }
 
     //create an accessory of random level and stats
     public Accessory createRandomAccessory(int maxLevel) {
         int level = rand.nextInt(maxLevel) + 1;
         int randomHealthBoost = rand.nextInt(level);
-        int randomStrengthBoost = generateRandomStatValue(level);
-        int randomSpeedBoost = generateRandomStatValue(level);
-        int randomMagicBoost = generateRandomStatValue(level);
 
-        return createAccessory(level, randomHealthBoost, randomStrengthBoost, randomSpeedBoost, randomMagicBoost);
-    }
-
-    private int generateRandomStatValue(int maxValue) {
-        int minValue = -maxValue;
-        //Calculation intended to increase likelihood of zero values by using range of (-maxValue, maxvalue)
-        //and truncating to values >= 0
-        return Math.max(0, rand.nextInt(maxValue - minValue) + minValue);
+        return createAccessory(level, randomHealthBoost);
     }
 
     private String generateRandomNameBasedOnLevel(int level) {

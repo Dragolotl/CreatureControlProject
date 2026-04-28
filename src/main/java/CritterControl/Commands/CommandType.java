@@ -1,5 +1,5 @@
 package CritterControl.Commands;
 
 public enum CommandType {
-    FEED, WEAR
+    FEED, BATTLE, WEAR
 }

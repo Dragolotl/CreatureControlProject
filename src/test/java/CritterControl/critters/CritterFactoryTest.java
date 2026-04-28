@@ -2,6 +2,7 @@ package CritterControl.critters;
 
 import org.junit.jupiter.api.Test;
 
+import static CritterControl.critters.CritterType.MAGIC;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CritterFactoryTest {
@@ -18,13 +19,25 @@ public class CritterFactoryTest {
 
     @Test
     public void testCritterType2() {
-        Critter critter = critterFactory.createCritterType2("placeholder");
-        assertInstanceOf(CritterType2.class, critter);
+        Critter critter = critterFactory.createNecroBones("placeholder");
+        assertInstanceOf(NecroBones.class, critter);
     }
 
     @Test
     public void testCritterType3() {
-        Critter critter = critterFactory.createCritterType3("placeholder");
-        assertInstanceOf(CritterType3.class, critter);
+        Critter critter = critterFactory.createVelociraptor("placeholder");
+        assertInstanceOf(Velociraptor.class, critter);
+    }
+
+    @Test
+    public void testMakeCritterOfTypeMagic(){
+        Critter critter = critterFactory.createCritter(MAGIC);
+        assertInstanceOf(NecroBones.class, critter);
+    }
+
+    @Test
+    public void testMakeCritterOfTypeMagic(){
+        Critter critter = critterFactory.createCritter(MAGIC);
+        assertInstanceOf(NecroBones.class, critter);
     }
 }
