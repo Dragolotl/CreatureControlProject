@@ -28,7 +28,7 @@ public class BattleCommand extends Command{
 
     private final Critter opponent;
     private final CritterType opponentType;
-    private CritterCorral corral;
+    private final CritterCorral corral;
     private final Garden garden;
 
     public BattleCommand(Critter player, CritterType opponentType, CritterCorral corral, Garden garden) {
@@ -41,6 +41,8 @@ public class BattleCommand extends Command{
 
     @Override
     public boolean execute() {
+        int maxHealth = critter.getHealth();
+
         logger.info("{} vs. {}... FIGHT!", critter.getName(), opponent.getName());
         while (critter.isAlive() && opponent.isAlive()) {
             boolean isPlayerAttacking = getPlayerChoice();
@@ -50,6 +52,7 @@ public class BattleCommand extends Command{
         if (critter.isAlive()) {
             logger.info("Congratulations! {} won the fight and leveled up!", critter.getName());
             critter.levelUp();
+            maxHealth += Critter.LEVEL_HEALTH_MULTIPLIER;
             arenaLevels.put(opponentType, arenaLevels.get(opponentType) + 1);
             corral.add(accessoryFactory.createRandomAccessory(arenaLevels.get(opponentType)));
         } else {
@@ -57,6 +60,7 @@ public class BattleCommand extends Command{
         }
 
         garden.growAllTrees();
+        critter.setHealth(maxHealth);
         return true;
     }
 
