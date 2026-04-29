@@ -33,6 +33,8 @@ public abstract class Critter {
 
     public Critter(String name, int level, Die die) {
         this.name = name;
+        this.level = level;
+        this.die=die;
         setHealth(level * LEVEL_HEALTH_MULTIPLIER);
         setHappiness(DEFAULT_HAPPINESS);
         setStrategyBasedOnLevel(strategyFactory.BaseStrategy(), strategyFactory.BaseStrategy());
@@ -57,6 +59,9 @@ public abstract class Critter {
         if (getHappiness() < 0) {
             setHappiness(0);
         }
+    }
+    public void setName(String name) {
+        this.name = name;
     }
     public void loseHappiness(int happinessLost){
         setHappiness(getHappiness()-happinessLost);

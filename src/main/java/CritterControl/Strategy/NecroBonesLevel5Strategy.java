@@ -3,6 +3,7 @@ package CritterControl.Strategy;
 import CritterControl.critters.Critter;
 
 public class NecroBonesLevel5Strategy extends BaseStrategy {
+    private static final int MAX_DAMAGE_REDUCTION = 3;
     @Override
     public void drain(Critter opponent) {
         if (opponent.getStrategy().getDamageReduction() < MAX_DAMAGE_REDUCTION) {
