@@ -24,7 +24,6 @@ public class CritterControl {
     private final Scanner scanner = new Scanner(System.in);
     private int gold;
     private Boolean playing;
-    private final Die foodDie = new Die(20);
 
     private final CritterCorral corral;
     private final Garden garden;
@@ -38,7 +37,7 @@ public class CritterControl {
 
     //include a map that holds arena levels indexed by a possible arena enum
     //need a scanner
-    static Logger logger = LoggerFactory.getLogger(CritterControl.class);
+    //static Logger logger = LoggerFactory.getLogger(CritterControl.class);
     //this will have the selectAction method, and also will have a feed method
 
     public CritterControl() {
@@ -91,7 +90,7 @@ public class CritterControl {
 
     public void startNewGame(){
         System.out.println("What type of Critter do you want?");
-        Scanner scanner = new Scanner(System.in);
+        //Scanner scanner = new Scanner(System.in);
         for(int i = 0; i < CritterType.values().length; i++){
             System.out.println((i) + ": " + CritterType.values()[i].name());
         }
@@ -130,7 +129,7 @@ public class CritterControl {
     public Critter selectCritter(){
         Critter currentCritter = null;
         System.out.println("Select Critter: ");
-        Scanner scanner = new Scanner(System.in);
+        //Scanner scanner = new Scanner(System.in);
         for(int i = 0; i < corral.getCritters().size(); i++){  //previously 0
             System.out.println((i) + ": " + corral.getCritters().get(i).getName());
         }
@@ -164,7 +163,7 @@ public class CritterControl {
         System.out.println("3: Feed");
         System.out.println("4: Dress");
         System.out.println("5: Quit");
-        Scanner scanner = new Scanner(System.in);
+        //Scanner scanner = new Scanner(System.in);
         //switch (user input):
         switch(scanner.nextInt()) {
             case 1:
@@ -217,7 +216,7 @@ public class CritterControl {
         //could possibly use a forEach
         //possibly move printing to a new function into CritterCorral
         //This function can find the outfit that the player wants to check, then pass it into the DressFunction
-        Scanner scanner = new Scanner(System.in);
+        //Scanner scanner = new Scanner(System.in);
         //List<Accessory> wardrobe = corral.getWardrobe();
         if(!corral.printAllAccessories()){
             return null; //find some way to just return to top menu
@@ -247,19 +246,12 @@ public class CritterControl {
     }
 
     private ICommand chooseBattleCommand(Critter currentCritter) {
-        //print arena choices
-        //get player choice (ensure valid index)
-        //index into the values of enum to get the proper type
-        //CritterType.values()[playerChoice]
-        //Critter opponent = some randomly generated critter of the appropriate type and level
-        //return commandFactory.BattleCommand(currentCritter, opponent);
-        Scanner scanner = new Scanner(System.in);
+        //Scanner scanner = new Scanner(System.in);
         System.out.println("Choose an arena: ");
         for(int i = 0; i < CritterType.values().length; i++){
             System.out.println((i) + ": " + CritterType.values()[i].name());
         }
         int arenaIndex = 0;
-        //Critter opponent = null;
         boolean chooseOption = true;
         while(chooseOption){
             arenaIndex = scanner.nextInt();
@@ -279,7 +271,7 @@ public class CritterControl {
     }
 
     private ICommand chooseFoodCommand(Critter currentCritter) {
-        Scanner scanner = new Scanner(System.in);
+        //Scanner scanner = new Scanner(System.in);
         if(!corral.printAllFood()){
             return null;
         }

@@ -16,7 +16,7 @@ public abstract class Critter {
     protected String name;
     private int health;
     private int level;
-    private Double happiness = 0.0; 
+    private Double happiness = 0.0;
     protected CritterType critterType;
     private Die die;
 
@@ -47,7 +47,7 @@ public abstract class Critter {
         this.name = name;
     }
 
-    public String getName(){ return name; };
+    public String getName(){ return name; }
     public String getBaseName() { return name; }
     public int getHealth(){
         return health;
