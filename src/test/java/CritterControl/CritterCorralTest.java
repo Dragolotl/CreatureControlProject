@@ -79,4 +79,59 @@ public class CritterCorralTest {
         corral.remove(hat);
         assertFalse(corral.contains(hat));
     }
+    @Test
+    public void testPrintAll() {
+        CritterCorral corral = new CritterCorral();
+
+        assertFalse(corral.printAllFood());
+        assertFalse(corral.printAllAccessories());
+
+        corral.add(new Food("Apple", 5, 1));
+        corral.add(new Accessory("Hat", 2));
+
+        assertTrue(corral.printAllAccessories());
+        assertTrue(corral.printAllFood());
+    }
+    @Test
+    public void testGetWardrobeAndKitchen() {
+        CritterCorral corral = new CritterCorral();
+
+        assertNotNull(corral.getWardrobe());
+        assertNotNull(corral.getKitchen());
+    }
+    @Test
+    public void testGetCritterByIndex() {
+        Critter manny = critterFactory.createMinitaur("Manny");
+        CritterCorral corral = new CritterCorral(List.of(manny));
+
+        assertEquals(manny, corral.getCritterByIndex(0));
+        assertNull(corral.getCritterByIndex(-1));
+        assertNull(corral.getCritterByIndex(1));
+    }
+
+    @Test
+    public void testGetAccessoryByIndex() {
+        CritterCorral corral = new CritterCorral();
+        Accessory hat = new Accessory("Hat", 2);
+
+        corral.add(hat);
+
+        assertEquals(hat, corral.getAccessoryByIndex(0));
+        assertNull(corral.getAccessoryByIndex(-1));
+        assertNull(corral.getAccessoryByIndex(1));
+    }
+
+    @Test
+    public void testGetFoodByIndex() {
+        CritterCorral corral = new CritterCorral();
+        Food apple = new Food("Apple", 5, 1);
+
+        corral.add(apple);
+
+        assertEquals(apple, corral.getFoodByIndex(0));
+        assertNull(corral.getFoodByIndex(-1));
+        assertNull(corral.getFoodByIndex(1));
+    }
+
+
 }

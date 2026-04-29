@@ -20,9 +20,6 @@ public enum FoodType {
         return new Food(name, happinessValue, level);
     }
 
-    public String getTreeName() {
-        return name + " Tree";
-    }
     public int getLevel() {
         return level;
     }

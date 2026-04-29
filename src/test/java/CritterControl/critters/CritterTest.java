@@ -1,5 +1,6 @@
 package CritterControl.critters;
 
+import CritterControl.Die;
 import CritterControl.Food.Food;
 import org.junit.jupiter.api.Test;
 
@@ -81,5 +82,55 @@ public class CritterTest {
         critter.setName("New Name");
 
         assertEquals("New Name", critter.getName());
+    }
+    @Test
+    void testSingleArgumentConstructorDefaultsLevelToOne() {
+        Critter critter = new Minitaur("Manny");
+
+        assertEquals(1, critter.getLevel());
+    }
+
+    @Test
+    void testSetDie() {
+        Critter critter = critterFactory.createMinitaur("Manny");
+        Die die = new Die(12);
+
+        critter.setDie(die);
+
+        assertEquals(die, critter.getDie());
+    }
+
+    @Test
+    void testAddHealth() {
+        Critter critter = critterFactory.createMinitaur("Manny");
+
+        int expectedHealth = critter.getHealth() + 5;
+
+        critter.addHealth(5);
+
+        assertEquals(expectedHealth, critter.getHealth());
+    }
+
+    @Test
+    void testBaseCritterGetAccessoryReturnsNull() {
+        Critter critter = critterFactory.createMinitaur("Manny");
+
+        assertNull(critter.getAccessory());
+    }
+    @Test
+    public void testNecroBonesHasTypeAdvantageOverSpeed() {
+        Critter necro = critterFactory.createNecroBones("Necro");
+        Critter raptor = critterFactory.createVelociraptor("Raptor");
+
+        assertEquals(Critter.TYPE_ADVANTAGE_DAMAGE_BONUS,
+                necro.checkForTypeAdvantage(raptor));
+    }
+
+    @Test
+    public void testNecroBonesNoTypeAdvantageOverStrength() {
+        Critter necro = critterFactory.createNecroBones("Necro");
+        Critter manny = critterFactory.createMinitaur("Manny");
+
+        assertEquals(0, necro.checkForTypeAdvantage(manny));
     }
 }

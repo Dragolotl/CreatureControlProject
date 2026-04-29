@@ -25,7 +25,7 @@ public abstract class Critter {
 
     public Critter(String name){
         this(name, 1);
-    }
+    } // I CAN'T FIGURE OUT HOW TO TEST THIS
 
     public Critter(String name, int level) {
         this(name, level, Die.createDefaultDie());
