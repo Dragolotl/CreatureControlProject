@@ -6,10 +6,12 @@ public class Minitaur extends Critter {
     //Strength Critter
     public Minitaur(String name, int level) {
         super(name, level);
+        critterType = CritterType.STRENGTH;
     }
 
     public Minitaur(String name){
         super(name);
+        critterType = CritterType.STRENGTH;
     }
 
     @Override

@@ -4,6 +4,7 @@ import CritterControl.Commands.CommandFactory;
 import CritterControl.Commands.ICommand;
 import CritterControl.CritterCorral;
 import CritterControl.FixedDie;
+import CritterControl.Garden.Garden;
 import CritterControl.Strategy.StrategyFactory;
 import CritterControl.critters.Critter;
 import CritterControl.critters.CritterFactory;
@@ -19,8 +20,10 @@ public class BattleCommandTest {
         Critter critter1 = critterFactory.createCritter(CritterType.STRENGTH, 1);
 
         CritterCorral corral = new CritterCorral();
+        Critter opponent = critterFactory.createCritter(CritterType.MAGIC, 1);
+        Garden garden = new Garden();
 
-        ICommand battle = commandFactory.BattleCommand(critter1, CritterType.MAGIC, corral);
+        ICommand battle = commandFactory.newBattleCommand(critter1, CritterType.MAGIC, corral, garden);
         battle.execute();
     }
 

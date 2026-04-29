@@ -92,7 +92,7 @@ public class CritterCorral {
             return false;
         }else{
             for (int i = 0; i < wardrobe.size(); i++) {
-                System.out.println((i+1) + ": " + wardrobe.toArray()[i]);
+                System.out.println((i) + ": " + wardrobe.toArray()[i]);
             }
             return true;
         }
@@ -116,7 +116,7 @@ public class CritterCorral {
             return false;
         }else{
             for (int i = 0; i < kitchen.size(); i++) {
-                System.out.println((i+1) + ": " + kitchen.toArray()[i]);
+                System.out.println((i) + ": " + kitchen.toArray()[i]);
             }
             return true;
         }

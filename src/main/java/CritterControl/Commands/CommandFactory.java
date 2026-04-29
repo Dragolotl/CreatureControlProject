@@ -13,8 +13,8 @@ import CritterControl.critters.Critter;
 import CritterControl.critters.CritterType;
 
 public class CommandFactory {
-    public ICommand newBattleCommand(Critter critter1, Critter opponentCritter, Garden garden) {
-        return new BattleCommand(critter1, opponentCritter, garden);
+    public ICommand newBattleCommand(Critter critter1, CritterType opponentType, CritterCorral corral, Garden garden) {
+        return new BattleCommand(critter1, opponentType, corral, garden);
     }
 
     public ICommand newDressCommand(Critter critter, CritterCorral corral, Accessory accessory) {

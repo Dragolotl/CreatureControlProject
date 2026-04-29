@@ -2,11 +2,12 @@ package CritterControl;
 
 import CritterControl.critters.Critter;
 import CritterControl.critters.CritterFactory;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class CritterControlTest {
+class CritterControlTest {
     @Test
     public void testGoldModification(){
         CritterCorral corral = new CritterCorral();
@@ -43,7 +44,7 @@ public class CritterControlTest {
 //    }
 
     @Test
-    public void testPlayerSelectCritter(){
+    void testPlayerSelectCritter(){
         CritterCorral corral = new CritterCorral();
         CritterControl critterControl = new CritterControl(corral);
         CritterFactory critterFactory = new CritterFactory();

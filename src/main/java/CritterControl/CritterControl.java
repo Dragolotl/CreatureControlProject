@@ -23,12 +23,13 @@ public class CritterControl {
     private final Scanner scanner = new Scanner(System.in);
     private int gold;
     private Boolean playing;
+    private final Die foodDie = new Die(20);
 
     private final CritterCorral corral;
     private final Garden garden;
-    private final FoodFactory foodFactory;
-    private final CritterFactory critterFactory;
-    public CommandFactory commandFactory;
+    private final FoodFactory foodFactory; // = new FoodFactory(foodDie);
+    private final CritterFactory critterFactory; // = new CritterFactory();
+    public CommandFactory commandFactory = new CommandFactory();
     //CommandFactory commandFactory;
 
     private final Map<CritterType, Integer> arenaLevels = new ConcurrentHashMap<>();
@@ -69,37 +70,82 @@ public class CritterControl {
 
     public void play() {
         //Get player choice of critter
-        Critter currentCritter = null;
-        logger.info("Select Critter: ");
+        System.out.println("Welcome to Critter Control!");
+        startNewGame();
+
+        Critter currentCritter = selectCritter();
+        assert currentCritter != null; //Might get rid of this assert statement, we'll see
+        System.out.println("Interact with " + currentCritter.getName() + "!");
+        while (playing) {
+            //I could check if it returns quitCommand, and if it does I could have a special 'if' statement that either calls selectCritter again or
+            //currentCritter =
+            ICommand command = selectAction(currentCritter);
+            command.execute();
+        }//Maybe quit command gets us out of this while loop, and there's one after it that checks if you want to check on another Critter or quit
+    }
+
+    public void startNewGame(){
+        System.out.println("What type of Critter do you want?");
         Scanner scanner = new Scanner(System.in);
-        for(int i = 0; i< corral.getCritters().size(); i++){
-            logger.info(corral.getCritters().get(i).getName());
+        for(int i = 0; i < CritterType.values().length; i++){
+            System.out.println((i) + ": " + CritterType.values()[i].name());
+        }
+
+        int critterTypeIndex = 0;
+        //String critterName = "";
+        //Critter opponent = null;
+        boolean chooseOption = true;
+        while(chooseOption){
+            critterTypeIndex = scanner.nextInt();
+            if(critterTypeIndex >= 0 && critterTypeIndex < CritterType.values().length){
+                System.out.println("You have chosen the Critter " + CritterType.values()[critterTypeIndex].name() + "!");
+                Critter firstCritter = critterFactory.createCritter(CritterType.values()[critterTypeIndex]);
+                corral.add(firstCritter);
+                nameYourCritter(firstCritter);
+                //opponent = critterFactory.createCritter(CritterType.values()[critterTypeIndex], currentCritter.getLevel());
+                chooseOption = false;
+            }else{
+                System.out.println(critterTypeIndex + " is out of bounds. Choose a valid Critter type. Printing again.");
+                for(int i = 0; i < CritterType.values().length; i++){
+                    System.out.println((i) + ": " + CritterType.values()[i].name());
+                }
+                break;
+            }
+        }
+    }
+
+    public void nameYourCritter(Critter critter){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Name your " + critter.getClass() + ": ");
+        //critterName = scanner.nextLine();
+        critter.setName(scanner.nextLine());
+        System.out.println("Your critter is now named " + critter.getName() + "!");
+    }
+
+    public Critter selectCritter(){
+        Critter currentCritter = null;
+        System.out.println("Select Critter: ");
+        Scanner scanner = new Scanner(System.in);
+        for(int i = 0; i < corral.getCritters().size(); i++){  //previously 0
+            System.out.println((i) + ": " + corral.getCritters().get(i).getName());
         }
         int critterIndex = 0;
         boolean chooseOption = true;
         while(chooseOption){
             critterIndex = scanner.nextInt();
             if(critterIndex >= 0 && critterIndex < corral.getCritters().size()){
-                logger.info("You have chosen Critter {}!", corral.getCritterByIndex(critterIndex).getName());
+                System.out.println("You have chosen Critter " + corral.getCritterByIndex(critterIndex).getName() + "!");
                 currentCritter = corral.getCritterByIndex(critterIndex);
                 chooseOption = false;
             }else{
-                logger.info("{} is out of bounds. Choose a valid Critter. Printing again.", critterIndex);
+                System.out.println(critterIndex + " is out of bounds. Choose a valid Critter. Printing again.");
                 for(int i = 0; i < corral.getCritters().size(); i++){
-                    logger.info(corral.getCritters().get(i).getName());
+                    System.out.println(corral.getCritters().get(i).getName());
                 }
-                break;
+                //break;
             }
         }
-
-        assert currentCritter != null; //Might get rid of this assert statement, we'll see
-        logger.info("Interact with {}!", currentCritter.getName());
-        while (playing) {
-            //Print menu somehow
-            //could select a current critter in here rather than selectAction?
-            ICommand command = selectAction(currentCritter);
-            command.execute();
-        }
+        return currentCritter;
     }
 
     public ICommand selectAction(Critter currentCritter) {
@@ -107,14 +153,25 @@ public class CritterControl {
 //        List<ICommand> actionOptions = getPossibleActions(myself, room); //Feed, Wear, Battle
 //        List<CommandType> actions = new ArrayList<>();
         //enum.values.getIndex
-        logger.info("Select option: ");
+        System.out.println("Select option: ");
+        System.out.println("1: Check Critter");
+        System.out.println("2: Battle");
+        System.out.println("3: Feed");
+        System.out.println("4: Dress");
+        System.out.println("5: Quit");
         Scanner scanner = new Scanner(System.in);
         //switch (user input):
         switch(scanner.nextInt()) {
             case 1:
                 //1. Change Critter (not a command, just variable swapping)
                 // Could have a function in critterCorral to iterate through the list
-                logger.info("Choose different Critter: --IN PROGRESS--");
+                System.out.println(currentCritter.getName() + " stats.");
+                System.out.println("Level: " + currentCritter.getLevel());
+                System.out.println("Type: " + currentCritter.getCritterType());
+                if(currentCritter.isAccessorized()){
+                    System.out.println("Wearing: " + currentCritter.getAccessory().name());
+                }
+                System.out.println(currentCritter.getName() + " is glad you checked in!");
                 //      print out critter list from corral
                 //      scan to get user choice
                 //      currentCritter = corral.get(userChoice);
@@ -132,7 +189,7 @@ public class CritterControl {
                 //3. Feed
                 //      scan for user input for amount of food
                 if(chooseFoodCommand(currentCritter) == null){
-                    logger.info("Please choose a different option for now. ");
+                    System.out.println("Please choose a different option for now. ");
                     break;
                 }
                 return chooseFoodCommand(currentCritter);
@@ -141,11 +198,12 @@ public class CritterControl {
                 //4. Dress
                 //selectSubAction - also returns an ICommand
                 //if returns null, then immediately break and go back to top menu?
-                if(chooseDressCommand(currentCritter) == null){
-                    logger.info("Please choose a different option for now. ");
+                ICommand theDressCommand = chooseDressCommand(currentCritter);
+                if(theDressCommand == null){
+                    System.out.println("Please choose a different option for now. ");
                     break;
                 }else{
-                    return chooseDressCommand(currentCritter);
+                    return theDressCommand;
                 }
 
             case 5:
@@ -153,9 +211,9 @@ public class CritterControl {
                 return commandFactory.newQuitCommand(playing);
             default:
                 //Default. maybe make them choose again...
-                logger.info("Choose a number from 1 to 5.");
+                System.out.println("Choose a number from 1 to 5.");
         }
-        return null;
+        return commandFactory.newQuitCommand(playing);  //return null;
     }
 
     //could have a getPossibleActions cause critters and clothes might change, arenas wouldn't
@@ -172,17 +230,17 @@ public class CritterControl {
         }
         //corral.printAllAccessories(); //if this returns false, then return a null?
 
-        logger.info("Choose an accessory: ");
+        System.out.println("Choose an accessory: ");
         int wardrobeIndex = 0;
         boolean chooseOption = true;
         while(chooseOption){
             wardrobeIndex = scanner.nextInt();
             if(wardrobeIndex >= 0 &&  wardrobeIndex < corral.getWardrobe().size()){ //wardrobeIndex >= 0 &&  wardrobeIndex < corral.getWardrobe().size()
-                logger.info("You have chosen the {} to put on {}", corral.getAccessoryByIndex(wardrobeIndex).name(), currentCritter.getName());
+                System.out.println("You have chosen the " + corral.getAccessoryByIndex(wardrobeIndex).name() +  " to put on " + currentCritter.getName());
                 chooseOption = false;
                 //return commandFactory.newWearCommand(currentCritter, corral, corral.getAccessoryByIndex(wardrobeIndex));
             }else{
-                logger.info("{} is out of bounds. Choose a valid number. Printing again.", wardrobeIndex);
+                System.out.println(wardrobeIndex + " is out of bounds. Choose a valid number. Printing again.");
                 //play the options again
                 corral.printAllAccessories();
                 break;
@@ -202,28 +260,28 @@ public class CritterControl {
         //Critter opponent = some randomly generated critter of the appropriate type and level
         //return commandFactory.BattleCommand(currentCritter, opponent);
         Scanner scanner = new Scanner(System.in);
-        logger.info("Choose an arena: ");
+        System.out.println("Choose an arena: ");
         for(int i = 0; i < CritterType.values().length; i++){
-            logger.info(CritterType.values()[i].name());
+            System.out.println((i) + ": " + CritterType.values()[i].name());
         }
         int arenaIndex = 0;
-        Critter opponent = null;
+        //Critter opponent = null;
         boolean chooseOption = true;
         while(chooseOption){
             arenaIndex = scanner.nextInt();
             if(arenaIndex >= 0 && arenaIndex < CritterType.values().length){
-                logger.info("You have chosen to enter the Arena of {}!", CritterType.values()[arenaIndex].name());
-                opponent = critterFactory.createCritter(CritterType.values()[arenaIndex], currentCritter.getLevel());
+                System.out.println("You have chosen to enter the Arena of " + CritterType.values()[arenaIndex].name() + "!");
+                //opponent = critterFactory.createCritter(CritterType.values()[arenaIndex], currentCritter.getLevel());
                 chooseOption = false;
             }else{
-                logger.info("{} is out of bounds. Choose a valid arena. Printing again.", arenaIndex);
+                System.out.println(arenaIndex + " is out of bounds. Choose a valid arena. Printing again.");
                 for(int i = 0; i < CritterType.values().length; i++){
-                    logger.info(CritterType.values()[i].name());
+                    System.out.println((i) + ": " + CritterType.values()[i].name());
                 }
                 break;
             }
         }
-        return commandFactory.newBattleCommand(currentCritter, opponent, garden); //CHECK LATER: Do I need a specific reference to Garden?
+        return commandFactory.newBattleCommand(currentCritter, CritterType.values()[arenaIndex], corral, garden); //CHECK LATER: Do I need a specific reference to Garden?
     }
 
     private ICommand chooseFoodCommand(Critter currentCritter) {
@@ -231,16 +289,16 @@ public class CritterControl {
         if(!corral.printAllFood()){
             return null;
         }
-        logger.info("Choose an food: ");
+        System.out.println("Choose an food: ");
         int foodIndex = 0;
         boolean chooseOption = true;
         while(chooseOption){
             foodIndex = scanner.nextInt();
             if(foodIndex >= 0 && foodIndex < corral.getKitchen().size()){
-                logger.info("You have chosen to feed {} to {}.",  corral.getKitchen().get(foodIndex).getName(), currentCritter.getName());
+                System.out.println("You have chosen to feed" + corral.getKitchen().get(foodIndex).getName() + " to " + currentCritter.getName());
                 chooseOption = false;
             }else{
-                logger.info("{} is out of bounds. Choose a valid number. Printing again.", foodIndex);
+                System.out.println(foodIndex + " is out of bounds. Choose a valid number. Printing again.");
                 //play the options again
                 corral.printAllFood();
                 break;

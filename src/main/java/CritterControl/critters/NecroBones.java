@@ -4,28 +4,28 @@ import CritterControl.Die;
 
 public class NecroBones extends Critter {
     //Magic Critter
-    public NecroBones(String name) { this(name, 1); }
+    public NecroBones(String name) {
+        this(name, 1);
+        critterType = CritterType.MAGIC;
+    }
     public NecroBones(String name, int level) {
         super(name, level);
-        //critterType = CritterType.MAGIC;
+        critterType = CritterType.MAGIC;
     }
+
+//    @Override
+//    public void setStrategy() {
+//        setStrategyBasedOnLevel(strategyFactory.NecroBonesLevel5Strategy(), strategyFactory.NecroBonesLevel10Strategy());
+//    }
 
     @Override
     public void setStrategy() {
         setStrategyBasedOnLevel(strategyFactory.NecroBonesLevel5Strategy(), strategyFactory.NecroBonesLevel10Strategy());
-    }
-
-    @Override
-    public void setStrategyBasedOnLevel(int level) {
-        if (level < 5) {
-            strategy = strategyFactory.BaseStrategy();
-        } else if (level < 10) {
-            strategy = strategyFactory.NecroBonesLevel5Strategy();
+        if (getLevel() == 5) {
             setDie(new Die(4));
-        } else {
-            strategy = strategyFactory.NecroBonesLevel10Strategy();
         }
     }
+
 
     @Override
     public int checkForTypeAdvantage(Critter opponent) {

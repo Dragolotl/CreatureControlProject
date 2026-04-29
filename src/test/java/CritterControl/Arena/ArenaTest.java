@@ -17,18 +17,18 @@ public class ArenaTest {
 
     //enter Critter's menu
     //create a cirtterCorral?
-    @Test
-    public void testArena() {
-        critterFactory = new CritterFactory();
-
-        CritterCorral corral = new CritterCorral();
-        corral.addCritter(bones);
-        //include a fixed die?
-        bones.getLevel();
-        bones.getArenaStage();
-        //get a die from manny or create a die? Probably have manny hold a die
-        bones.battle();
-    }
+//    @Test
+//    public void testArena() {
+//        critterFactory = new CritterFactory();
+//
+//        CritterCorral corral = new CritterCorral();
+//        corral.addCritter(bones);
+//        //include a fixed die?
+//        bones.getLevel();
+//        bones.getArenaStage();
+//        //get a die from manny or create a die? Probably have manny hold a die
+//        bones.battle();
+//    }
 
     //player selects battle
     //select one of the arenas
