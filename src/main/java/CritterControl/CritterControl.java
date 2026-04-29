@@ -3,7 +3,6 @@ package CritterControl;
 import CritterControl.Commands.ICommand;
 import CritterControl.Commands.QuitCommand;
 import CritterControl.Food.FoodFactory;
-import CritterControl.Food.FoodType;
 import CritterControl.critters.Critter;
 import CritterControl.critters.CritterFactory;
 import CritterControl.critters.CritterType;
@@ -13,8 +12,6 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class CritterControl {
     //Might need another class to handle these to be in compliance with Single Responsibility Principle
