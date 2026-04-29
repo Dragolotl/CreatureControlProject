@@ -1,29 +1,85 @@
 package CritterControl.critters;
 
 import CritterControl.Food.Food;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CritterTest {
     CritterFactory critterFactory = new CritterFactory();
+
     @Test
-    void testCreatureHasHungerLevel(){
+    void testCritterHasHealth() {
         Critter critter = critterFactory.createMinitaur("placeholder name");
+
         assertTrue(critter.getHealth() > 0);
     }
-    @Test
-    void testEat(){
-        Critter critter = critterFactory.createMinitaur("placeholder name");
-        Food broccoli = new Food("Broccoli", 10.0, -1.0);
-        Double initialHealth=critter.getHealth();
-        Double initialHappiness=critter.getHappiness();
-        Double expectedHealth=critter.getHealth()+ broccoli.getHealthValue();
-        Double expectedHappiness = critter.getHappiness()+broccoli.getHappinessValue();
-        critter.eat(broccoli);
-        Assertions.assertEquals(expectedHealth, critter.getHealth());
-        Assertions.assertEquals(expectedHappiness, critter.getHappiness());
 
+    @Test
+    void testEatChangesHappiness() {
+        Critter critter = critterFactory.createMinitaur("placeholder name");
+        Food broccoli = new Food("Broccoli", 10, -1);
+
+        int expectedHappiness = critter.getHappiness() + broccoli.getHappinessValue();
+
+        critter.eat(broccoli);
+
+        assertEquals(expectedHappiness, critter.getHappiness());
+    }
+
+    @Test
+    void testLoseHealth() {
+        Critter critter = critterFactory.createMinitaur("placeholder name");
+
+        int expectedHealth = critter.getHealth() - 2;
+
+        critter.loseHealth(2);
+
+        assertEquals(expectedHealth, critter.getHealth());
+    }
+
+    @Test
+    void testLoseHappiness() {
+        Critter critter = critterFactory.createMinitaur("placeholder name");
+
+        critter.loseHappiness(10);
+
+        assertEquals(90, critter.getHappiness());
+    }
+
+    @Test
+    void testHappinessDoesNotGoBelowZero() {
+        Critter critter = critterFactory.createMinitaur("placeholder name");
+
+        critter.loseHappiness(200);
+
+        assertEquals(0, critter.getHappiness());
+    }
+
+    @Test
+    void testHappinessDoesNotGoAboveOneHundred() {
+        Critter critter = critterFactory.createMinitaur("placeholder name");
+
+        critter.setHappiness(200);
+
+        assertEquals(100, critter.getHappiness());
+    }
+
+    @Test
+    void testLevelUp() {
+        Critter critter = critterFactory.createMinitaur("placeholder name");
+
+        critter.levelUp();
+
+        assertEquals(2, critter.getLevel());
+    }
+
+    @Test
+    void testSetName() {
+        Critter critter = critterFactory.createMinitaur("placeholder name");
+
+        critter.setName("New Name");
+
+        assertEquals("New Name", critter.getName());
     }
 }

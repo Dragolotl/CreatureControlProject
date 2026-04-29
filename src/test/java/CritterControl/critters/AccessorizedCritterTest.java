@@ -43,4 +43,26 @@ public class AccessorizedCritterTest {
         assertFalse(corral.contains(critter));
         assertEquals(expectedName, actualName);
     }
+    @Test
+    public void testIsAccessorizedAndAccessoryGetter() {
+        Critter critter = critterFactory.createMinitaur("Manny");
+        Accessory accessory = accessoryFactory.createDefaultAccessory();
+
+        Critter accessorized = critterFactory.createAccessorizedCritter(critter, accessory);
+
+        assertTrue(accessorized.isAccessorized());
+        assertEquals(accessory, accessorized.getAccessory());
+    }
+
+    @Test
+    public void testDelegationToBaseCritter() {
+        Critter critter = critterFactory.createMinitaur("Manny");
+        Accessory accessory = accessoryFactory.createDefaultAccessory();
+
+        Critter accessorized = critterFactory.createAccessorizedCritter(critter, accessory);
+
+        assertEquals(critter.getLevel(), accessorized.getLevel());
+        assertEquals(critter.isAlive(), accessorized.isAlive());
+        assertEquals(critter.getHappiness(), accessorized.getHappiness());
+    }
 }
