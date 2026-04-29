@@ -58,9 +58,11 @@ public class CritterControl {
         //Get player choice of critter
         System.out.println("Welcome to Critter Control!");
         startNewGame();
+        // since we only have 1 critter in current gme:
+        Critter currentCritter = corral.getCritterByIndex(0);
 
-        Critter currentCritter = selectCritter();
-        assert currentCritter != null; //Might get rid of this assert statement, we'll see
+//        Critter currentCritter = selectCritter();
+//        assert currentCritter != null; //Might get rid of this assert statement, we'll see
         System.out.println("Interact with " + currentCritter.getName() + "!");
         while (playing) {
             //I could check if it returns quitCommand, and if it does I could have a special 'if' statement that either calls selectCritter again or
@@ -122,7 +124,7 @@ public class CritterControl {
         int critterIndex = 0;
         boolean chooseOption = true;
         while(chooseOption){
-            critterIndex = scanner.nextInt();
+            critterIndex = scanner.nextInt()-1;//bc we want 0 indexing
             if(critterIndex >= 0 && critterIndex < corral.getCritters().size()){
                 System.out.println("You have chosen Critter " + corral.getCritterByIndex(critterIndex).getName() + "!");
                 currentCritter = corral.getCritterByIndex(critterIndex);
@@ -214,7 +216,7 @@ public class CritterControl {
         int wardrobeIndex = 0;
         boolean chooseOption = true;
         while(chooseOption){
-            wardrobeIndex = scanner.nextInt();
+            wardrobeIndex = scanner.nextInt()-1;
             if(wardrobeIndex >= 0 &&  wardrobeIndex < corral.getWardrobe().size()){ //wardrobeIndex >= 0 &&  wardrobeIndex < corral.getWardrobe().size()
                 System.out.println("You have chosen the " + corral.getAccessoryByIndex(wardrobeIndex).name() +  " to put on " + currentCritter.getName());
                 chooseOption = false;
@@ -266,9 +268,9 @@ public class CritterControl {
         int foodIndex = 0;
         boolean chooseOption = true;
         while(chooseOption){
-            foodIndex = scanner.nextInt();
+            foodIndex = scanner.nextInt()-1;
             if(foodIndex >= 0 && foodIndex < corral.getKitchen().size()){
-                System.out.println("You have chosen to feed" + corral.getKitchen().get(foodIndex).getName() + " to " + currentCritter.getName());
+                System.out.println("You have chosen to feed " + corral.getKitchen().get(foodIndex).getName() + " to " + currentCritter.getName());
                 chooseOption = false;
             }else{
                 System.out.println(foodIndex + " is out of bounds. Choose a valid number. Printing again.");

@@ -18,4 +18,8 @@ public class Food {
     public int getHappinessValue(){
         return happinessValue;
     }
+    @Override
+    public String toString() {
+        return name + " (health: " + healthValue + ", happiness: " + happinessValue + ")";
+    }
 }

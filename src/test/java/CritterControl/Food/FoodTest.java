@@ -41,4 +41,12 @@ public class FoodTest {
         assertEquals(0, rottenApple.getHealthValue());
         assertEquals(-9, rottenApple.getHappinessValue());
     }
+    @Test
+    public void testToString() {
+        Food food = new Food("Apple", 5, 1);
+
+        String result = food.toString();
+
+        assertEquals("Apple (health: 5, happiness: 1)", result);
+    }
 }
