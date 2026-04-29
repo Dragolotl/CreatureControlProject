@@ -5,17 +5,19 @@ import CritterControl.Die;
 import CritterControl.Food.Food;
 import CritterControl.Strategy.IStrategy;
 import CritterControl.Strategy.StrategyFactory;
+import org.slf4j.Logger;
 
 public abstract class Critter {
     protected static final StrategyFactory strategyFactory = new StrategyFactory();
+    private static Logger logger = org.slf4j.LoggerFactory.getLogger(Critter.class);
 
     public static final int TYPE_ADVANTAGE_DAMAGE_BONUS = 2;
-    protected static final int DEFAULT_HAPPINESS=100;
+    protected static final int DEFAULT_HAPPINESS=50;
     public static final int LEVEL_HEALTH_MULTIPLIER = 5;
     protected String name;
     private int health;
     private int level;
-    private int happiness; //TODO - IS HAPPINESS STILL A FACTOR IN THIS GAME?
+    private int happiness;
     protected CritterType critterType;
     private Die die;
 
@@ -25,7 +27,7 @@ public abstract class Critter {
 
     public Critter(String name){
         this(name, 1);
-    } // I CAN'T FIGURE OUT HOW TO TEST THIS
+    }
 
     public Critter(String name, int level) {
         this(name, level, Die.createDefaultDie());
@@ -45,6 +47,9 @@ public abstract class Critter {
     public int getHealth(){
         return health;
     }
+    public int getHappiness() {
+        return happiness;
+    }
     public int getLevel() { return level; }
     public Die getDie() { return die; }
     public CritterType getCritterType() { return critterType; }
@@ -63,7 +68,10 @@ public abstract class Critter {
     public void setName(String name) {
         this.name = name;
     }
-    public void levelUp(){ this.level++; }
+    public void levelUp(){
+        this.level++;
+        setStrategy();
+    }
     public void loseHappiness(int happinessLost){
         setHappiness(getHappiness()-happinessLost);
     }
@@ -71,8 +79,6 @@ public abstract class Critter {
     public void setDie(Die die) {
         this.die = die;
     }
-
-
 
     public abstract void setStrategy();
 
@@ -86,12 +92,9 @@ public abstract class Critter {
         }
     }
 
-    //Is this how eating works with the game as it is?
-    //TODO - DECIDE HOW EAT SHOULD WORK
     public void eat(Food food){
         setHappiness(getHappiness() + food.getHappinessValue());
     }
-
 
     public void addHealth(int healthGained) {
         setHealth(getHealth() + healthGained);
@@ -109,15 +112,10 @@ public abstract class Critter {
         return getHealth() > 0;
     }
 
-    public int getHappiness() {
-        return happiness;
-    }
-
     public boolean isAccessorized() {
         return false;
     }
 
-    //TODO - Not sure if calc is correct but maybe...
     public void damage(Critter opponent) {
         //If stunned, cut result in half
         int playerResult = getDie().roll();
@@ -138,23 +136,37 @@ public abstract class Critter {
         //Total result = initial roll + type advantage damage bonus + stolen damage (if high level magic type)
         playerResult = Math.max(0, playerResult
                 + checkForTypeAdvantage(opponent)
+                + shouldAddHappinessDamageBonus()
                 + (getStrategy().shouldStealEnemyDamage() * opponent.getStrategy().getDamageReduction())
                 + getStrategy().addDodgeDamageBonus()
                 - getStrategy().getDamageReduction());
+        logger.info("{} rolled a {}", getName(), playerResult);
         opponentResult = Math.max(0, opponentResult
                 + checkForTypeAdvantage(this)
                 + (getStrategy().shouldStealEnemyDamage() * getStrategy().getDamageReduction())
                 + getStrategy().addDodgeDamageBonus()
                 - opponent.getStrategy().getDamageReduction());
+        logger.info("{} rolled a {}", opponent.getName(), opponentResult);
 
         if (playerResult > opponentResult) {
+            logger.info("{} dealt {} damage to {}", getName(), playerResult - opponentResult, opponent.getName());
             opponent.loseHealth(playerResult - opponentResult);
         } else {
+            logger.info("{} dealt {} damage to {}", opponent.getName(), opponentResult - playerResult, getName());
             loseHealth(opponentResult -  playerResult);
         }
 
         getStrategy().drain(opponent);
         opponent.getStrategy().drain(this);
+    }
+
+    private int shouldAddHappinessDamageBonus() {
+        if (getHappiness() >= 85) {
+            logger.info("Critter is happy! They will deal extra damage in combat...");
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
     abstract public int checkForTypeAdvantage(Critter opponent);

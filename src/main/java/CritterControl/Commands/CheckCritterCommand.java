@@ -14,6 +14,7 @@ public class CheckCritterCommand implements ICommand{
         System.out.println(critter.getName() + " stats.");
         System.out.println("Level: " + critter.getLevel());
         System.out.println("Type: " + critter.getCritterType());
+        System.out.println("Happiness: " + critter.getHappiness());
         if(critter.isAccessorized()){
             System.out.println("Wearing: " + critter.getAccessory().name());
         }

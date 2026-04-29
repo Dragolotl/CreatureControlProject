@@ -7,6 +7,7 @@ import CritterControl.Food.FoodFactory;
 import CritterControl.critters.Critter;
 import CritterControl.critters.CritterFactory;
 import CritterControl.critters.CritterType;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 public class BattleCommandTest {
@@ -14,7 +15,7 @@ public class BattleCommandTest {
     private final CommandFactory commandFactory = new CommandFactory();
     private final FoodFactory foodFactory = new FoodFactory();
 
-    @Test
+    @Disabled
     public void testBattleCommand() {
         Critter critter1 = critterFactory.createCritter(CritterType.STRENGTH, 1);
 

@@ -10,7 +10,7 @@ public class Minitaur extends Critter {
 
     @Override
     public void setStrategy() {
-        setStrategyBasedOnLevel(strategyFactory.MinitaurLevel5Strategy(), strategyFactory.MinitaurLevel10Strategy() );
+        setStrategyBasedOnLevel(strategyFactory.MinitaurLevel5Strategy(), strategyFactory.MinitaurLevel10Strategy());
     }
 
 

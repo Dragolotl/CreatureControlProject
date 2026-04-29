@@ -2,16 +2,12 @@ package CritterControl;
 
 import CritterControl.Commands.ICommand;
 import CritterControl.Commands.QuitCommand;
-import CritterControl.Food.FoodFactory;
 import CritterControl.critters.Critter;
 import CritterControl.critters.CritterFactory;
 import CritterControl.critters.CritterType;
 import CritterControl.Commands.CommandFactory;
 
-import java.util.Map;
 import java.util.Scanner;
-import java.util.concurrent.ConcurrentHashMap;
-
 
 public class CritterControl {
     //Might need another class to handle these to be in compliance with Single Responsibility Principle
@@ -22,8 +18,6 @@ public class CritterControl {
     private final CritterCorral corral;
     private static final CritterFactory critterFactory = new CritterFactory();
     private static final CommandFactory commandFactory = new CommandFactory();
-    private static final FoodFactory foodFactory = new FoodFactory();
-    private final Map<CritterType, Integer> arenaLevels = new ConcurrentHashMap<>();
 //need a scanner
 
     //include a map that holds arena levels indexed by a possible arena enum
@@ -275,15 +269,6 @@ public class CritterControl {
             }
         }
         return commandFactory.newFeedCommand(currentCritter, corral.getKitchen().get(foodIndex), corral);
-    }
-
-
-
-
-    public void initializeArenas() {
-        arenaLevels.put(CritterType.STRENGTH, 1);
-        arenaLevels.put(CritterType.SPEED, 1);
-        arenaLevels.put(CritterType.MAGIC, 1);
     }
 
 

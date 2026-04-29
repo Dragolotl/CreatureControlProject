@@ -45,7 +45,7 @@ public class CritterTest {
 
         critter.loseHappiness(10);
 
-        assertEquals(90, critter.getHappiness());
+        assertEquals(40, critter.getHappiness());
     }
 
     @Test

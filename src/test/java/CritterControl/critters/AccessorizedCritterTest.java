@@ -75,6 +75,17 @@ public class AccessorizedCritterTest {
     }
 
     @Test
+    public void testAccessorizedCritterSetsStrategyProperly() {
+        Critter critter = critterFactory.createMinitaur("Manny", 4);
+        Accessory accessory = accessoryFactory.createRandomAccessory(10);
+        Critter accessorizedCritter = critterFactory.createAccessorizedCritter(critter, accessory);
+        accessorizedCritter.levelUp();
+        assertEquals(5, accessorizedCritter.getLevel());
+        System.out.println(accessorizedCritter.getStrategy());
+        System.out.println(accessorizedCritter.getName());
+    }
+
+    @Test
     public void testAccessorizedCritterDelegatesSetHealth() {
         Critter critter = critterFactory.createMinitaur("Manny");
         Accessory accessory = accessoryFactory.createDefaultAccessory();

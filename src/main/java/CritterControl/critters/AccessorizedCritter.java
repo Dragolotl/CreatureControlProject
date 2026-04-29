@@ -1,6 +1,7 @@
 package CritterControl.critters;
 
 import CritterControl.Accessories.Accessory;
+import CritterControl.Die;
 import CritterControl.Strategy.IStrategy;
 
 public class AccessorizedCritter extends Critter {
@@ -30,6 +31,16 @@ public class AccessorizedCritter extends Critter {
     @Override
     public int getLevel() {
         return myself.getLevel();
+    }
+
+    @Override
+    public CritterType getCritterType() {
+        return myself.getCritterType();
+    }
+
+    @Override
+    public Die getDie() {
+        return myself.getDie();
     }
 
     @Override
@@ -63,6 +74,8 @@ public class AccessorizedCritter extends Critter {
     }
 
     @Override
+    public void setDie(Die die) { myself.setDie(die); }
+    @Override
     public void levelUp() { myself.levelUp(); }
 
     @Override
@@ -79,6 +92,7 @@ public class AccessorizedCritter extends Critter {
     public int checkForTypeAdvantage(Critter opponent) {
         return myself.checkForTypeAdvantage(opponent);
     }
+
 //    @Override
 //    public void setStrategyBasedOnLevel(int level) {
 //        myself.setStrategyBasedOnLevel(level);

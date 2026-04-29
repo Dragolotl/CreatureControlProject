@@ -15,7 +15,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 
 public class BattleCommand extends Command{
-    private static final Scanner scanner = new Scanner(System.in);
     private static final Logger logger = org.slf4j.LoggerFactory.getLogger(BattleCommand.class);
     private static final Random random = new Random();
     private static final CritterFactory critterFactory = new CritterFactory();
@@ -79,6 +78,9 @@ public class BattleCommand extends Command{
     private boolean getPlayerChoice() {
         int playerChoice;
 
+        logger.info("{}'s Health: {}", critter.getName(), critter.getHealth());
+        logger.info("{}'s Health: {}", opponent.getName(), opponent.getHealth());
+
         if (checkForStunned(critter)) {
             logger.info("You are stunned and can't act!");
             return true;
@@ -88,9 +90,8 @@ public class BattleCommand extends Command{
             logger.info("Make your choice:");
             logger.info("1. ATTACK");
             logger.info("2. DODGE");
-            playerChoice = random.nextInt(2) + 1;
-//          Scanner scanner = new Scanner(System.in);
-//          playerChoice = Integer.parseInt(scanner.nextLine());
+            Scanner scanner = new Scanner(System.in);
+            playerChoice = Integer.parseInt(scanner.nextLine());
             if (playerChoice < 1 || playerChoice > 2) {
                 logger.warn("Invalid choice.");
             } else {
@@ -123,8 +124,8 @@ public class BattleCommand extends Command{
         if (critter.isAlive()) {
             logger.info("Congratulations! {} won the fight and leveled up!", critter.getName());
             critter.levelUp();
-//            maxHealth += Critter.LEVEL_HEALTH_MULTIPLIER;
             arenaLevels.put(opponentType, arenaLevels.get(opponentType) + 1);
+            logger.info("You earned a prize!");
             corral.add(accessoryFactory.createRandomAccessory(arenaLevels.get(opponentType)));
             corral.add(foodFactory.createRandomFood(arenaLevels.get(opponentType)));
             critter.loseHappiness(winHappinessLost);
