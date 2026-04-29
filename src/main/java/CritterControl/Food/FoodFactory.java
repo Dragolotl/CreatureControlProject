@@ -1,8 +1,12 @@
 package CritterControl.Food;
 
 import CritterControl.Die;
+import CritterControl.critters.Critter;
+
+import java.util.Random;
 
 public class FoodFactory {
+
     private static final int DEFAULT_DIE_SIZE = 20;
     private static final Die die = new Die(DEFAULT_DIE_SIZE);
 
@@ -25,4 +29,10 @@ public class FoodFactory {
 
         return baseFood;
     }
+
+    public Food createRandomFood(Integer maxLevel) {
+        return FoodType.createRandomFoodBasedOnLevel(maxLevel);
+    }
+
+
 }

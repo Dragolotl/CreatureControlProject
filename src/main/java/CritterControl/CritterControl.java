@@ -273,20 +273,6 @@ public class CritterControl {
     }
 
 
-    public boolean buyTree(FoodType foodType) {
-        if (gold < foodType.getCost()) {
-            return false;
-        }
-
-        garden.addTree(new Tree(
-                foodType.getTreeName(),
-                foodType.createFood(),
-                foodFactory
-        )); // is this new keyword okay? i can't think of something better
-
-        loseGold(foodType.getCost());
-        return true;
-    }
 
     //have a play method
     //play can be a void method, and a save and quit function at the top menu(

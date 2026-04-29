@@ -2,6 +2,7 @@ package CritterControl.Commands;
 
 import CritterControl.Accessories.AccessoryFactory;
 import CritterControl.CritterCorral;
+import CritterControl.Food.FoodFactory;
 import CritterControl.Garden.Garden;
 import CritterControl.critters.Critter;
 import CritterControl.critters.CritterFactory;
@@ -13,12 +14,15 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.ConcurrentHashMap;
 
+
 public class BattleCommand extends Command{
     private static final Scanner scanner = new Scanner(System.in);
     private static final Logger logger = org.slf4j.LoggerFactory.getLogger(BattleCommand.class);
     private static final Random random = new Random();
     private static final CritterFactory critterFactory = new CritterFactory();
     private static final AccessoryFactory accessoryFactory = new AccessoryFactory();
+    private static final FoodFactory foodFactory = new FoodFactory();
+
     private static final Map<CritterType, Integer> arenaLevels = new ConcurrentHashMap<>();
     private static final int OPPONENT_CHANCE_TO_DODGE = 3;
 
@@ -49,15 +53,7 @@ public class BattleCommand extends Command{
             fight(isPlayerAttacking, randomBattleOpponentChoice());
         }
 
-        if (critter.isAlive()) {
-            logger.info("Congratulations! {} won the fight and leveled up!", critter.getName());
-            critter.levelUp();
-            maxHealth += Critter.LEVEL_HEALTH_MULTIPLIER;
-            arenaLevels.put(opponentType, arenaLevels.get(opponentType) + 1);
-            corral.add(accessoryFactory.createRandomAccessory(arenaLevels.get(opponentType)));
-        } else {
-            logger.info("{} lost the fight. Bummer...", critter.getName());
-        }
+        maxHealth+=handleBattleResult(); // handle battle result calculates health to add to critter
 
         garden.growAllTrees();
         critter.setHealth(maxHealth);
@@ -123,5 +119,20 @@ public class BattleCommand extends Command{
         arenaLevels.put(CritterType.STRENGTH, 1);
         arenaLevels.put(CritterType.SPEED, 1);
         arenaLevels.put(CritterType.MAGIC, 1);
+    }
+    public int handleBattleResult(){
+        if (critter.isAlive()) {
+            logger.info("Congratulations! {} won the fight and leveled up!", critter.getName());
+            critter.levelUp();
+//            maxHealth += Critter.LEVEL_HEALTH_MULTIPLIER;
+            arenaLevels.put(opponentType, arenaLevels.get(opponentType) + 1);
+            corral.add(accessoryFactory.createRandomAccessory(arenaLevels.get(opponentType)));
+            corral.add(foodFactory.createRandomFood(arenaLevels.get(opponentType)));
+            return Critter.LEVEL_HEALTH_MULTIPLIER;
+        } else {
+            logger.info("{} lost the fight. Bummer...", critter.getName());
+            return 0;
+        }
+
     }
 }

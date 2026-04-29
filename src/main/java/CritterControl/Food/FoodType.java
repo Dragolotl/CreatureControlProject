@@ -1,29 +1,38 @@
 package CritterControl.Food;
 
-public enum FoodType {
-    APPLE("Apple", 3, 2,2),
-    CUPCAKE("Cupcake", -5, 10,7),
-    BROCCOLI("Broccoli", 5, -5,7);
+import java.util.Random;
 
+public enum FoodType {
+    APPLE("Apple", 5, 1),
+    CUPCAKE("Cupcake",15,7),
+    BROCCOLI("Strawberry", 10, 4);
+    private static final Random rand = new Random();
     private final String name;
-    private final int healthValue;
     private final int happinessValue;
-    private final int cost;
-    FoodType(String name, int healthValue, int happinessValue, int cost) {
+    private final int level;
+    FoodType(String name, int happinessValue, int level) {
         this.name = name;
-        this.healthValue = healthValue;
         this.happinessValue = happinessValue;
-        this.cost=cost;
+        this.level=level;
     }
 
     public Food createFood() {
-        return new Food(name, healthValue, happinessValue);
+        return new Food(name, happinessValue, level);
     }
 
     public String getTreeName() {
         return name + " Tree";
     }
-    public int getCost() {
-        return cost;
+    public int getLevel() {
+        return level;
     }
+    public static Food createRandomFoodBasedOnLevel(int maxLevel){
+        FoodType[] foods = values();
+        FoodType randomFoodType =foods[rand.nextInt(foods.length)];
+        while (maxLevel < randomFoodType.getLevel()){
+            randomFoodType = foods[rand.nextInt(foods.length)];
+        }
+        return randomFoodType.createFood();
+    }
+
 }
