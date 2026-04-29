@@ -10,12 +10,12 @@ public abstract class Critter {
     protected static final StrategyFactory strategyFactory = new StrategyFactory();
 
     public static final int TYPE_ADVANTAGE_DAMAGE_BONUS = 2;
-    protected static final double DEFAULT_HAPPINESS=100.0;
+    protected static final int DEFAULT_HAPPINESS=100.0;
     public static final int LEVEL_HEALTH_MULTIPLIER = 5;
     protected String name;
     private int health;
     private int level;
-    private Double happiness; //TODO - IS HAPPINESS STILL A FACTOR IN THIS GAME?
+    private int happiness; //TODO - IS HAPPINESS STILL A FACTOR IN THIS GAME?
     private CritterType critterType;
     private Die die;
 
@@ -48,15 +48,18 @@ public abstract class Critter {
     public CritterType getCritterType() { return critterType; }
     public IStrategy getStrategy() { return strategy; }
     public void setHealth(int healthValue) { this.health = healthValue; }
-    public void setHappiness(Double happinessValue) {
+    public void setHappiness(int happinessValue) {
         this.happiness = happinessValue;
-        if (getHappiness() > 100.0){
-            setHappiness(100.0);
+        if (getHappiness() > 100){
+            setHappiness(100);
         }
 
-        if (getHappiness() < 0.0) {
-            setHappiness(0.0);
+        if (getHappiness() < 0) {
+            setHappiness(0);
         }
+    }
+    public void loseHappiness(int happinessLost){
+        setHappiness(getHappiness()-happinessLost);
     }
 
     public void setDie(Die die) {
@@ -81,9 +84,9 @@ public abstract class Critter {
     //Is this how eating works with the game as it is?
     //TODO - DECIDE HOW EAT SHOULD WORK
     public void eat(Food food){
-        addHealth(food.getHealthValue());
         setHappiness(getHappiness() + food.getHappinessValue());
     }
+
 
     public void addHealth(int healthGained) {
         setHealth(getHealth() + healthGained);
@@ -101,7 +104,7 @@ public abstract class Critter {
         return getHealth() > 0;
     }
 
-    public Double getHappiness() {
+    public int getHappiness() {
         return happiness;
     }
 

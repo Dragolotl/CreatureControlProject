@@ -121,6 +121,9 @@ public class BattleCommand extends Command{
         arenaLevels.put(CritterType.MAGIC, 1);
     }
     public int handleBattleResult(){
+        int winHappinessLost = 5;
+        int loseHappinessLost = 20;
+
         if (critter.isAlive()) {
             logger.info("Congratulations! {} won the fight and leveled up!", critter.getName());
             critter.levelUp();
@@ -128,9 +131,11 @@ public class BattleCommand extends Command{
             arenaLevels.put(opponentType, arenaLevels.get(opponentType) + 1);
             corral.add(accessoryFactory.createRandomAccessory(arenaLevels.get(opponentType)));
             corral.add(foodFactory.createRandomFood(arenaLevels.get(opponentType)));
+            critter.loseHappiness(winHappinessLost);
             return Critter.LEVEL_HEALTH_MULTIPLIER;
         } else {
             logger.info("{} lost the fight. Bummer...", critter.getName());
+            critter.loseHappiness(loseHappinessLost);
             return 0;
         }
 
