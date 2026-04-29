@@ -34,10 +34,39 @@ public class CritterFactoryTest {
         Critter critter = critterFactory.createCritter(MAGIC);
         assertInstanceOf(NecroBones.class, critter);
     }
+    @Test
+    public void testVelociraptorLevel5SetStrategy() {
+        Critter raptor = critterFactory.createVelociraptor("Raptor", 5);
+
+        raptor.setStrategy();
+
+        assertInstanceOf(CritterControl.Strategy.VelociraptorLevel5Strategy.class, raptor.getStrategy());
+    }
 
     @Test
-    public void testMakeCritterOfTypeMagic(){
-        Critter critter = critterFactory.createCritter(MAGIC);
-        assertInstanceOf(NecroBones.class, critter);
+    public void testVelociraptorLevel10SetStrategy() {
+        Critter raptor = critterFactory.createVelociraptor("Raptor", 10);
+
+        raptor.setStrategy();
+
+        assertInstanceOf(CritterControl.Strategy.VelociraptorLevel10Strategy.class, raptor.getStrategy());
     }
+
+    @Test
+    public void testVelociraptorHasTypeAdvantageOverStrength() {
+        Critter raptor = critterFactory.createVelociraptor("Raptor");
+        Critter manny = critterFactory.createMinitaur("Manny");
+
+        assertEquals(Critter.TYPE_ADVANTAGE_DAMAGE_BONUS, raptor.checkForTypeAdvantage(manny));
+    }
+
+    @Test
+    public void testVelociraptorHasNoTypeAdvantageOverMagic() {
+        Critter raptor = critterFactory.createVelociraptor("Raptor");
+        Critter necro = critterFactory.createNecroBones("Necro");
+
+        assertEquals(0, raptor.checkForTypeAdvantage(necro));
+    }
+
+
 }

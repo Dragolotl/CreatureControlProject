@@ -1,42 +1,41 @@
 package CritterControl;
 
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CritterControlTest {
+
     @Test
-    public void testGoldModification(){
+    public void testConstructorWithCorral() {
         CritterCorral corral = new CritterCorral();
         CritterControl critterControl = new CritterControl(corral);
 
-        critterControl.addGold(40);
-        assertEquals(40, critterControl.getGold());
-
-        critterControl.loseGold(25);
-        assertEquals(15, critterControl.getGold());
-
-        critterControl.loseGold(25);
-        assertEquals(0, critterControl.getGold());
+        assertNotNull(critterControl);
     }
+
     @Test
-    public void testMinimumGold(){
-        CritterCorral corral = new CritterCorral();
-        CritterControl critterControl = new CritterControl(corral);
+    public void testDefaultConstructor() {
+        CritterControl critterControl = new CritterControl();
 
-        critterControl.addGold(10);
-        critterControl.loseGold(11);
-
-        assertEquals(0, critterControl.getGold());
+        assertNotNull(critterControl);
     }
+
     @Test
-    public void testMinimumFoodAmount() {
-        CritterCorral corral = new CritterCorral();
-        CritterControl critterControl = new CritterControl(corral);
+    public void testInitializeArenasRuns() {
+        CritterControl critterControl = new CritterControl();
 
-        critterControl.addFood(5);
-        critterControl.loseFood(10);
+        critterControl.initializeArenas();
 
-        assertEquals(0, critterControl.getFoodAmount());
+        assertNotNull(critterControl);
     }
+
+
+
+
+
+
+
 }

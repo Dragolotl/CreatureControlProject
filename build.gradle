@@ -1,5 +1,10 @@
 plugins {
     id 'java'
+    id 'application'
+}
+
+application {
+    mainClass = 'org.example.Main'
 }
 
 repositories {
@@ -36,4 +41,7 @@ configurations {
 
 tasks.withType(Javadoc).configureEach {
     options.quiet()
+}
+run {
+    standardInput = System.in
 }

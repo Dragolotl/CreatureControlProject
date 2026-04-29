@@ -33,7 +33,7 @@ public class CritterFactory {
     }
 
     public Critter createCritter(CritterType type, int level) {
-        return switch (type) {
+        Critter critter = switch (type) {
             case STRENGTH -> createMinitaur("Manny", level);
             case SPEED -> createVelociraptor("Sonic", level);
             case MAGIC -> createNecroBones("Bones", level);
@@ -41,5 +41,7 @@ public class CritterFactory {
 //                System.out.println("Invalid Critter type.");
 
         };
+        critter.setStrategy();
+        return critter;
     }
 }

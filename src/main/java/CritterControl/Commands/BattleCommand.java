@@ -2,7 +2,7 @@ package CritterControl.Commands;
 
 import CritterControl.Accessories.AccessoryFactory;
 import CritterControl.CritterCorral;
-import CritterControl.Garden.Garden;
+import CritterControl.Food.FoodFactory;
 import CritterControl.critters.Critter;
 import CritterControl.critters.CritterFactory;
 import CritterControl.critters.CritterType;
@@ -13,12 +13,15 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.ConcurrentHashMap;
 
+
 public class BattleCommand extends Command{
     private static final Scanner scanner = new Scanner(System.in);
     private static final Logger logger = org.slf4j.LoggerFactory.getLogger(BattleCommand.class);
     private static final Random random = new Random();
     private static final CritterFactory critterFactory = new CritterFactory();
     private static final AccessoryFactory accessoryFactory = new AccessoryFactory();
+    private static final FoodFactory foodFactory = new FoodFactory();
+
     private static final Map<CritterType, Integer> arenaLevels = new ConcurrentHashMap<>();
     private static final int OPPONENT_CHANCE_TO_DODGE = 3;
 
@@ -28,35 +31,28 @@ public class BattleCommand extends Command{
 
     private final Critter opponent;
     private final CritterType opponentType;
-    private CritterCorral corral;
-    private final Garden garden;
+    private final CritterCorral corral;
 
-    public BattleCommand(Critter player, CritterType opponentType, CritterCorral corral, Garden garden) {
+    public BattleCommand(Critter player, CritterType opponentType, CritterCorral corral) {
         super(CommandType.BATTLE, player);
         this.opponent = critterFactory.createCritter(opponentType, arenaLevels.get(opponentType));
         this.opponentType = opponentType;
         this.corral = corral;
-        this.garden=garden;
     }
 
     @Override
     public boolean execute() {
+        int maxHealth = critter.getHealth();
+
         logger.info("{} vs. {}... FIGHT!", critter.getName(), opponent.getName());
         while (critter.isAlive() && opponent.isAlive()) {
             boolean isPlayerAttacking = getPlayerChoice();
             fight(isPlayerAttacking, randomBattleOpponentChoice());
         }
 
-        if (critter.isAlive()) {
-            logger.info("Congratulations! {} won the fight and leveled up!", critter.getName());
-            critter.levelUp();
-            arenaLevels.put(opponentType, arenaLevels.get(opponentType) + 1);
-            corral.add(accessoryFactory.createRandomAccessory(arenaLevels.get(opponentType)));
-        } else {
-            logger.info("{} lost the fight. Bummer...", critter.getName());
-        }
+        maxHealth+=handleBattleResult(); // handle battle result calculates health to add to critter
 
-        garden.growAllTrees();
+        critter.setHealth(maxHealth);
         return true;
     }
 
@@ -119,5 +115,25 @@ public class BattleCommand extends Command{
         arenaLevels.put(CritterType.STRENGTH, 1);
         arenaLevels.put(CritterType.SPEED, 1);
         arenaLevels.put(CritterType.MAGIC, 1);
+    }
+    public int handleBattleResult(){
+        int winHappinessLost = 5;
+        int loseHappinessLost = 20;
+
+        if (critter.isAlive()) {
+            logger.info("Congratulations! {} won the fight and leveled up!", critter.getName());
+            critter.levelUp();
+//            maxHealth += Critter.LEVEL_HEALTH_MULTIPLIER;
+            arenaLevels.put(opponentType, arenaLevels.get(opponentType) + 1);
+            corral.add(accessoryFactory.createRandomAccessory(arenaLevels.get(opponentType)));
+            corral.add(foodFactory.createRandomFood(arenaLevels.get(opponentType)));
+            critter.loseHappiness(winHappinessLost);
+            return Critter.LEVEL_HEALTH_MULTIPLIER;
+        } else {
+            logger.info("{} lost the fight. Bummer...", critter.getName());
+            critter.loseHappiness(loseHappinessLost);
+            return 0;
+        }
+
     }
 }

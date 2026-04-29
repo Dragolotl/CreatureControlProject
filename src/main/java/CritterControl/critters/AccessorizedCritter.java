@@ -19,7 +19,7 @@ public class AccessorizedCritter extends Critter {
 
     @Override
     public String getBaseName() {
-        return myself.getName();
+        return myself.getBaseName();
     }
 
     @Override
@@ -38,7 +38,7 @@ public class AccessorizedCritter extends Critter {
     }
 
     @Override
-    public Double getHappiness() {
+    public int getHappiness() {
         return myself.getHappiness();
     }
 
@@ -58,7 +58,7 @@ public class AccessorizedCritter extends Critter {
     }
 
     @Override
-    public void setHappiness(Double happinessValue) {
+    public void setHappiness(int happinessValue) {
         myself.setHappiness(happinessValue);
     }
 
@@ -79,5 +79,8 @@ public class AccessorizedCritter extends Critter {
     public int checkForTypeAdvantage(Critter opponent) {
         return myself.checkForTypeAdvantage(opponent);
     }
-
+//    @Override
+//    public void setStrategyBasedOnLevel(int level) {
+//        myself.setStrategyBasedOnLevel(level);
+//    }
 }

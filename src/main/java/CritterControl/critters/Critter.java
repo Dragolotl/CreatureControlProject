@@ -1,21 +1,22 @@
 package CritterControl.critters;
 
+import CritterControl.Accessories.Accessory;
 import CritterControl.Die;
 import CritterControl.Food.Food;
 import CritterControl.Strategy.IStrategy;
 import CritterControl.Strategy.StrategyFactory;
 
-abstract public class Critter {
+public abstract class Critter {
     protected static final StrategyFactory strategyFactory = new StrategyFactory();
 
     public static final int TYPE_ADVANTAGE_DAMAGE_BONUS = 2;
-    protected static final double DEFAULT_HAPPINESS=100.0;
-    protected static final int LEVEL_HEALTH_MULTIPLIER = 5;
+    protected static final int DEFAULT_HAPPINESS=100;
+    public static final int LEVEL_HEALTH_MULTIPLIER = 5;
     protected String name;
     private int health;
     private int level;
-    private Double happiness; //TODO - IS HAPPINESS STILL A FACTOR IN THIS GAME?
-    private CritterType critterType;
+    private int happiness; //TODO - IS HAPPINESS STILL A FACTOR IN THIS GAME?
+    protected CritterType critterType;
     private Die die;
 
     protected IStrategy strategy;
@@ -24,7 +25,7 @@ abstract public class Critter {
 
     public Critter(String name){
         this(name, 1);
-    }
+    } // I CAN'T FIGURE OUT HOW TO TEST THIS
 
     public Critter(String name, int level) {
         this(name, level, Die.createDefaultDie());
@@ -32,6 +33,8 @@ abstract public class Critter {
 
     public Critter(String name, int level, Die die) {
         this.name = name;
+        this.level = level;
+        this.die=die;
         setHealth(level * LEVEL_HEALTH_MULTIPLIER);
         setHappiness(DEFAULT_HAPPINESS);
         setStrategyBasedOnLevel(strategyFactory.BaseStrategy(), strategyFactory.BaseStrategy());
@@ -47,22 +50,28 @@ abstract public class Critter {
     public CritterType getCritterType() { return critterType; }
     public IStrategy getStrategy() { return strategy; }
     public void setHealth(int healthValue) { this.health = healthValue; }
-    public void setHappiness(Double happinessValue) {
+    public void setHappiness(int happinessValue) {
         this.happiness = happinessValue;
-        if (getHappiness() > 100.0){
-            setHappiness(100.0);
+        if (getHappiness() > 100){
+            setHappiness(100);
         }
 
-        if (getHappiness() < 0.0) {
-            setHappiness(0.0);
+        if (getHappiness() < 0) {
+            setHappiness(0);
         }
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public void levelUp(){ this.level++; }
+    public void loseHappiness(int happinessLost){
+        setHappiness(getHappiness()-happinessLost);
     }
 
     public void setDie(Die die) {
         this.die = die;
     }
 
-//    abstract public void setStrategyBasedOnLevel(int level);
 
 
     public abstract void setStrategy();
@@ -80,9 +89,9 @@ abstract public class Critter {
     //Is this how eating works with the game as it is?
     //TODO - DECIDE HOW EAT SHOULD WORK
     public void eat(Food food){
-        addHealth(food.getHealthValue());
         setHappiness(getHappiness() + food.getHappinessValue());
     }
+
 
     public void addHealth(int healthGained) {
         setHealth(getHealth() + healthGained);
@@ -100,7 +109,7 @@ abstract public class Critter {
         return getHealth() > 0;
     }
 
-    public Double getHappiness() {
+    public int getHappiness() {
         return happiness;
     }
 
@@ -149,6 +158,8 @@ abstract public class Critter {
     }
 
     abstract public int checkForTypeAdvantage(Critter opponent);
+
+    public Accessory getAccessory(){return null; }//THIS IS MOSTLY HERE FOR TESTING, WE CAN TRY OTHER THINGS WITH IT LATER
 
 //    public void getArenaStage(String arenaType) { //This might be something we delete
 //        arenaLevel.get(arenaType);

@@ -43,4 +43,91 @@ public class AccessorizedCritterTest {
         assertFalse(corral.contains(critter));
         assertEquals(expectedName, actualName);
     }
+    @Test
+    public void testIsAccessorizedAndAccessoryGetter() {
+        Critter critter = critterFactory.createMinitaur("Manny");
+        Accessory accessory = accessoryFactory.createDefaultAccessory();
+
+        Critter accessorized = critterFactory.createAccessorizedCritter(critter, accessory);
+
+        assertTrue(accessorized.isAccessorized());
+        assertEquals(accessory, accessorized.getAccessory());
+    }
+
+    @Test
+    public void testDelegationToBaseCritter() {
+        Critter critter = critterFactory.createMinitaur("Manny");
+        Accessory accessory = accessoryFactory.createDefaultAccessory();
+
+        Critter accessorized = critterFactory.createAccessorizedCritter(critter, accessory);
+
+        assertEquals(critter.getLevel(), accessorized.getLevel());
+        assertEquals(critter.isAlive(), accessorized.isAlive());
+        assertEquals(critter.getHappiness(), accessorized.getHappiness());
+    }
+    @Test
+    public void testAccessorizedCritterDelegatesStrategy() {
+        Critter critter = critterFactory.createMinitaur("Manny");
+        Accessory accessory = accessoryFactory.createDefaultAccessory();
+        Critter accessorizedCritter = critterFactory.createAccessorizedCritter(critter, accessory);
+
+        assertEquals(critter.getStrategy(), accessorizedCritter.getStrategy());
+    }
+
+    @Test
+    public void testAccessorizedCritterDelegatesSetHealth() {
+        Critter critter = critterFactory.createMinitaur("Manny");
+        Accessory accessory = accessoryFactory.createDefaultAccessory();
+        Critter accessorizedCritter = critterFactory.createAccessorizedCritter(critter, accessory);
+
+        accessorizedCritter.setHealth(20);
+
+        assertEquals(20, critter.getHealth());
+    }
+
+    @Test
+    public void testAccessorizedCritterDelegatesSetHappiness() {
+        Critter critter = critterFactory.createMinitaur("Manny");
+        Accessory accessory = accessoryFactory.createDefaultAccessory();
+        Critter accessorizedCritter = critterFactory.createAccessorizedCritter(critter, accessory);
+
+        accessorizedCritter.setHappiness(50);
+
+        assertEquals(50, critter.getHappiness());
+    }
+
+    @Test
+    public void testAccessorizedCritterDelegatesLevelUp() {
+        Critter critter = critterFactory.createMinitaur("Manny");
+        Accessory accessory = accessoryFactory.createDefaultAccessory();
+        Critter accessorizedCritter = critterFactory.createAccessorizedCritter(critter, accessory);
+
+        accessorizedCritter.levelUp();
+
+        assertEquals(2, critter.getLevel());
+    }
+
+    @Test
+    public void testAccessorizedCritterDelegatesSetStrategy() {
+        Critter critter = critterFactory.createMinitaur("Manny", 5);
+        Accessory accessory = accessoryFactory.createDefaultAccessory();
+        Critter accessorizedCritter = critterFactory.createAccessorizedCritter(critter, accessory);
+
+        accessorizedCritter.setStrategy();
+
+        assertInstanceOf(CritterControl.Strategy.MinitaurLevel5Strategy.class, critter.getStrategy());
+    }
+    @Test
+    public void testAccessorizedCritterDelegatesTypeAdvantage() {
+        Critter raptor = critterFactory.createVelociraptor("Raptor");
+        Critter manny = critterFactory.createMinitaur("Manny");
+
+        Accessory accessory = accessoryFactory.createDefaultAccessory();
+        Critter accessorized = critterFactory.createAccessorizedCritter(raptor, accessory);
+
+        int expected = raptor.checkForTypeAdvantage(manny);
+        int actual = accessorized.checkForTypeAdvantage(manny);
+
+        assertEquals(expected, actual);
+    }
 }
