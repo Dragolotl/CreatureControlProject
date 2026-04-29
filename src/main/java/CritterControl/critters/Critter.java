@@ -10,7 +10,7 @@ public abstract class Critter {
     protected static final StrategyFactory strategyFactory = new StrategyFactory();
 
     public static final int TYPE_ADVANTAGE_DAMAGE_BONUS = 2;
-    protected static final int DEFAULT_HAPPINESS=100.0;
+    protected static final int DEFAULT_HAPPINESS=100;
     public static final int LEVEL_HEALTH_MULTIPLIER = 5;
     protected String name;
     private int health;

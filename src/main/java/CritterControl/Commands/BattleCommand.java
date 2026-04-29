@@ -3,7 +3,6 @@ package CritterControl.Commands;
 import CritterControl.Accessories.AccessoryFactory;
 import CritterControl.CritterCorral;
 import CritterControl.Food.FoodFactory;
-import CritterControl.Garden.Garden;
 import CritterControl.critters.Critter;
 import CritterControl.critters.CritterFactory;
 import CritterControl.critters.CritterType;
@@ -33,14 +32,12 @@ public class BattleCommand extends Command{
     private final Critter opponent;
     private final CritterType opponentType;
     private final CritterCorral corral;
-    private final Garden garden;
 
-    public BattleCommand(Critter player, CritterType opponentType, CritterCorral corral, Garden garden) {
+    public BattleCommand(Critter player, CritterType opponentType, CritterCorral corral) {
         super(CommandType.BATTLE, player);
         this.opponent = critterFactory.createCritter(opponentType, arenaLevels.get(opponentType));
         this.opponentType = opponentType;
         this.corral = corral;
-        this.garden=garden;
     }
 
     @Override
@@ -55,7 +52,6 @@ public class BattleCommand extends Command{
 
         maxHealth+=handleBattleResult(); // handle battle result calculates health to add to critter
 
-        garden.growAllTrees();
         critter.setHealth(maxHealth);
         return true;
     }

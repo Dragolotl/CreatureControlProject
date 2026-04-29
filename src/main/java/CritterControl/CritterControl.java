@@ -3,8 +3,7 @@ package CritterControl;
 import CritterControl.Commands.ICommand;
 import CritterControl.Food.FoodFactory;
 import CritterControl.Food.FoodType;
-import CritterControl.Garden.Garden;
-import CritterControl.Garden.Tree;
+
 import CritterControl.critters.Critter;
 import CritterControl.critters.CritterFactory;
 import CritterControl.critters.CritterType;
@@ -25,7 +24,6 @@ public class CritterControl {
     private Boolean playing;
 
     private final CritterCorral corral;
-    private final Garden garden;
     private final FoodFactory foodFactory;
     private final CritterFactory critterFactory;
     public CommandFactory commandFactory;
@@ -43,13 +41,8 @@ public class CritterControl {
         this.gold = 0;
         this.corral = new CritterCorral();
         this.playing = true;
-        this.garden = new Garden();
-        this.foodFactory = new FoodFactory(new Die(20));
+        this.foodFactory = new FoodFactory();
         this.critterFactory = new CritterFactory();
-        garden.addTree(new Tree(
-                FoodType.APPLE.getTreeName(),
-                FoodType.APPLE.createFood(),
-                foodFactory)); // need to fix new keyword here
     }
 
     public CritterControl(CritterCorral corral) {
@@ -57,13 +50,9 @@ public class CritterControl {
         this.gold = 0;
         this.playing = true;
         this.corral = corral;
-        this.garden = new Garden();
-        this.foodFactory = new FoodFactory(new Die(20));
+        this.foodFactory = new FoodFactory();
         this.critterFactory = new CritterFactory();
-        garden.addTree(new Tree(
-                FoodType.APPLE.getTreeName(),
-                FoodType.APPLE.createFood(),
-                foodFactory)); // need to fix new keyword here
+
 
     } //Also potentially code in an Arena if we do Ramsey's plan
 
@@ -223,7 +212,7 @@ public class CritterControl {
                 break;
             }
         }
-        return commandFactory.newBattleCommand(currentCritter, opponent, garden); //CHECK LATER: Do I need a specific reference to Garden?
+        return commandFactory.newBattleCommand(currentCritter, opponent);
     }
 
     private ICommand chooseFoodCommand(Critter currentCritter) {
