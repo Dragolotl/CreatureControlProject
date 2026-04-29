@@ -27,7 +27,7 @@ public class CommandTest {
     @Test
     public void testFeedCommandExecutes() {
         Critter critter = critterFactory.createMinitaur("Manny");
-        Food food = new Food("Apple", 1);
+        Food food = new Food("Apple", 1,1);
         CritterCorral corral = new CritterCorral();
 
         corral.add(food);
@@ -80,7 +80,7 @@ public class CommandTest {
     public void testCommandFactoryCreatesFeedCommand() {
         Critter critter = critterFactory.createMinitaur("Manny");
         CritterCorral corral = new CritterCorral();
-        Food food = new Food("Apple", 1);
+        Food food = new Food("Apple", 1,1);
 
         ICommand command = commandFactory.newFeedCommand(critter, food, corral);
 

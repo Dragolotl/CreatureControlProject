@@ -19,7 +19,7 @@ public class CritterTest {
     @Test
     void testEatChangesHappiness() {
         Critter critter = critterFactory.createMinitaur("placeholder name");
-        Food broccoli = new Food("Broccoli", -1);
+        Food broccoli = new Food("Broccoli", -1,1);
 
         int expectedHappiness = critter.getHappiness() + broccoli.getHappinessValue();
 
