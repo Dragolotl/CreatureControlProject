@@ -14,3 +14,6 @@ Finally, Command Pattern will be used to handle actions players can take like fe
 Players will be awarded various accessories as they play. Critters can wear these accessories, and some even provide helpful stat bonuses.
 
 Critters can only wear one accessory at a time and each accessory can only be worn by one critter at a time.
+
+## How to Play
+Run the main function in GameConfigurator. Alternatively, you could run in terminal by typing ./gradlew run (for IntellJ's terminal)
