@@ -1,6 +1,7 @@
 package CritterControl;
 
 import CritterControl.Commands.ICommand;
+import CritterControl.Commands.QuitCommand;
 import CritterControl.Food.FoodFactory;
 import CritterControl.Food.FoodType;
 import CritterControl.Garden.Garden;
@@ -78,8 +79,12 @@ public class CritterControl {
         System.out.println("Interact with " + currentCritter.getName() + "!");
         while (playing) {
             //I could check if it returns quitCommand, and if it does I could have a special 'if' statement that either calls selectCritter again or
-            //currentCritter =
+            currentCritter = corral.getCritterByIndex(0);
             ICommand command = selectAction(currentCritter);
+            if(command instanceof QuitCommand) {
+                System.out.println("Thanks for playing!");
+                playing = false;
+            }
             command.execute();
         }//Maybe quit command gets us out of this while loop, and there's one after it that checks if you want to check on another Critter or quit
     }
@@ -163,21 +168,10 @@ public class CritterControl {
         //switch (user input):
         switch(scanner.nextInt()) {
             case 1:
-                //1. Change Critter (not a command, just variable swapping)
-                // Could have a function in critterCorral to iterate through the list
-                System.out.println(currentCritter.getName() + " stats.");
-                System.out.println("Level: " + currentCritter.getLevel());
-                System.out.println("Type: " + currentCritter.getCritterType());
-                if(currentCritter.isAccessorized()){
-                    System.out.println("Wearing: " + currentCritter.getAccessory().name());
-                }
-                System.out.println(currentCritter.getName() + " is glad you checked in!");
-                //      print out critter list from corral
-                //      scan to get user choice
-                //      currentCritter = corral.get(userChoice);
-                //somehow pull player out of this selectAction and put them in a new one - potentially put this in play?
+                //1. Check Critter
+                return commandFactory.newCheckCritterCommand(currentCritter);
                 //      return commandFactory.SleepCommand();
-                break;
+                //break;
             case 2:
                 //2. Battle
                 //      print out arenas
@@ -213,7 +207,7 @@ public class CritterControl {
                 //Default. maybe make them choose again...
                 System.out.println("Choose a number from 1 to 5.");
         }
-        return commandFactory.newQuitCommand(playing);  //return null;
+        return commandFactory.newCheckCritterCommand(currentCritter);  //return null;
     }
 
     //could have a getPossibleActions cause critters and clothes might change, arenas wouldn't

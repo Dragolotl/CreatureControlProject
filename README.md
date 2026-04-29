@@ -12,3 +12,6 @@ Finally, Strategy Pattern will be used for coding our Creatures dynamic behavior
 Players will be awarded various accessories as they play. Critters can wear these accessories, and some even provide helpful stat bonuses.
 
 Critters can only wear one accessory at a time and each accessory can only be worn by one critter at a time.
+
+## How to Play
+Run the main function in GameConfigurator, the menu should appear in the Run/debug menu, whichever one you're using.

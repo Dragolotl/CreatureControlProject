@@ -16,7 +16,7 @@ public abstract class Critter {
     protected String name;
     private int health;
     private int level;
-    private Double happiness; //TODO - IS HAPPINESS STILL A FACTOR IN THIS GAME?
+    private Double happiness = 0.0; 
     protected CritterType critterType;
     private Die die;
 

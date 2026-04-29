@@ -29,4 +29,8 @@ public class CommandFactory {
         return new QuitCommand(isPlaying);
     }
 
+    public ICommand newCheckCritterCommand(Critter critter) {
+        return new CheckCritterCommand(critter);
+    }
+
 }
