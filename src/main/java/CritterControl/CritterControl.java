@@ -20,11 +20,9 @@ public class CritterControl {
     private Boolean playing;
 
     private final CritterCorral corral;
-    private final FoodFactory foodFactory; // = new FoodFactory(foodDie);
-    private final CritterFactory critterFactory; // = new CritterFactory();
-    public CommandFactory commandFactory = new CommandFactory();
-    //CommandFactory commandFactory;
-
+    private static final CritterFactory critterFactory = new CritterFactory();
+    private static final CommandFactory commandFactory = new CommandFactory();
+    private static final FoodFactory foodFactory = new FoodFactory();
     private final Map<CritterType, Integer> arenaLevels = new ConcurrentHashMap<>();
 //need a scanner
 
@@ -36,8 +34,8 @@ public class CritterControl {
     public CritterControl() {
         this.corral = new CritterCorral();
         this.playing = true;
-        this.foodFactory = new FoodFactory();
-        this.critterFactory = new CritterFactory();
+      //  this.foodFactory = new FoodFactory();
+   //     this.critterFactory = new CritterFactory();
 
     }
 
@@ -45,8 +43,8 @@ public class CritterControl {
         //Give player starting stuff
         this.playing = true;
         this.corral = corral;
-        this.foodFactory = new FoodFactory();
-        this.critterFactory = new CritterFactory();
+//        this.foodFactory = new FoodFactory();
+//        this.critterFactory = new CritterFactory();
 
 
     } //Also potentially code in an Arena if we do Ramsey's plan

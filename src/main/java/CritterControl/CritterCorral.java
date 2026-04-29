@@ -1,7 +1,6 @@
 package CritterControl;
 
 import CritterControl.Accessories.Accessory;
-import CritterControl.Accessories.Accessory;
 import CritterControl.Food.Food;
 import CritterControl.critters.Critter;
 

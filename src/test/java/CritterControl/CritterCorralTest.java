@@ -4,7 +4,6 @@ import CritterControl.critters.Critter;
 import CritterControl.critters.CritterFactory;
 import CritterControl.Accessories.Accessory;
 import CritterControl.Food.Food;
-import java.util.NoSuchElementException;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -60,7 +59,7 @@ public class CritterCorralTest {
     @Test
     public void testAddAndRemoveFood() {
         CritterCorral corral = new CritterCorral();
-        Food apple = new Food("Apple", 5, 1);
+        Food apple = new Food("Apple", 1);
 
         corral.add(apple);
         assertTrue(corral.contains(apple));
@@ -86,7 +85,7 @@ public class CritterCorralTest {
         assertFalse(corral.printAllFood());
         assertFalse(corral.printAllAccessories());
 
-        corral.add(new Food("Apple", 5, 1));
+        corral.add(new Food("Apple", 1));
         corral.add(new Accessory("Hat", 2));
 
         assertTrue(corral.printAllAccessories());
@@ -124,7 +123,7 @@ public class CritterCorralTest {
     @Test
     public void testGetFoodByIndex() {
         CritterCorral corral = new CritterCorral();
-        Food apple = new Food("Apple", 5, 1);
+        Food apple = new Food("Apple", 1);
 
         corral.add(apple);
 

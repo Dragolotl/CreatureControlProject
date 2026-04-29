@@ -8,7 +8,7 @@ public class FoodTest {
 
     @Test
     public void testFoodStoresValues() {
-        Food apple = new Food("Apple", 5, 1);
+        Food apple = new Food("Apple", 1);
 
         assertEquals("Apple", apple.getName());
         assertEquals(5, apple.getHealthValue());
@@ -17,7 +17,7 @@ public class FoodTest {
 
     @Test
     public void testGoldenFoodAddsHealth() {
-        Food apple = new Food("Apple", 5, 1);
+        Food apple = new Food("Apple", 1);
         Food goldenApple = new GoldenFood(apple);
 
         assertEquals(10, goldenApple.getHealthValue());
@@ -26,7 +26,7 @@ public class FoodTest {
 
     @Test
     public void testRainbowFoodAddsHappiness() {
-        Food apple = new Food("Apple", 5, 1);
+        Food apple = new Food("Apple", 1);
         Food rainbowApple = new RainbowFood(apple);
 
         assertEquals(5, rainbowApple.getHealthValue());
@@ -35,7 +35,7 @@ public class FoodTest {
 
     @Test
     public void testRottenFoodChangesHealthAndHappiness() {
-        Food apple = new Food("Apple", 5, 1);
+        Food apple = new Food("Apple", 1);
         Food rottenApple = new RottenFood(apple);
 
         assertEquals(0, rottenApple.getHealthValue());
@@ -43,7 +43,7 @@ public class FoodTest {
     }
     @Test
     public void testToString() {
-        Food food = new Food("Apple", 5, 1);
+        Food food = new Food("Apple", 1);
 
         String result = food.toString();
 
