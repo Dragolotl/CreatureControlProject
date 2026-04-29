@@ -3,7 +3,6 @@ package CritterControl.Commands;
 import CritterControl.Accessories.Accessory;
 import CritterControl.CritterCorral;
 import CritterControl.Food.Food;
-import CritterControl.Garden.Garden;
 import CritterControl.critters.Critter;
 import CritterControl.Commands.ICommand;
 
@@ -13,7 +12,7 @@ import CritterControl.critters.Critter;
 import CritterControl.critters.CritterType;
 
 public class CommandFactory {
-    public ICommand newBattleCommand(Critter critter1, CritterType opponentType, CritterCorral corral, Garden garden) {
+    public ICommand newBattleCommand(Critter critter1, CritterType opponentType, CritterCorral corral) {
         return new BattleCommand(critter1, opponentType, corral);
     }
 

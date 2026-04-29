@@ -16,7 +16,7 @@ public abstract class Critter {
     private int health;
     private int level;
     private int happiness; //TODO - IS HAPPINESS STILL A FACTOR IN THIS GAME?
-    private CritterType critterType;
+    protected CritterType critterType;
     private Die die;
 
     protected IStrategy strategy;
@@ -63,6 +63,7 @@ public abstract class Critter {
     public void setName(String name) {
         this.name = name;
     }
+    public void levelUp(){ this.level++; }
     public void loseHappiness(int happinessLost){
         setHappiness(getHappiness()-happinessLost);
     }
@@ -71,7 +72,6 @@ public abstract class Critter {
         this.die = die;
     }
 
-    abstract public void setStrategyBasedOnLevel(int level);
 
 
     public abstract void setStrategy();

@@ -20,7 +20,6 @@ public class CritterControl {
     //Might need another class to handle these to be in compliance with Single Responsibility Principle
     //CritterControl should handle playing the game
     private final Scanner scanner = new Scanner(System.in);
-    private int gold;
     private Boolean playing;
 
     private final CritterCorral corral;
@@ -38,7 +37,6 @@ public class CritterControl {
     //this will have the selectAction method, and also will have a feed method
 
     public CritterControl() {
-        this.gold = 0;
         this.corral = new CritterCorral();
         this.playing = true;
         this.foodFactory = new FoodFactory();
@@ -48,7 +46,6 @@ public class CritterControl {
 
     public CritterControl(CritterCorral corral) {
         //Give player starting stuff
-        this.gold = 0;
         this.playing = true;
         this.corral = corral;
         this.foodFactory = new FoodFactory();
@@ -283,20 +280,6 @@ public class CritterControl {
         return commandFactory.newFeedCommand(currentCritter, corral.getKitchen().get(foodIndex), corral);
     }
 
-    public void addGold(int goldEarned) {
-        gold += goldEarned;
-    }
-
-    public void loseGold(int goldLost) {
-        gold -= goldLost;
-        if (gold <= 0) {
-            gold = 0;
-        }
-    }
-
-    public int getGold() {
-        return gold;
-    }
 
 
 
