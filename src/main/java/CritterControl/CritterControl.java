@@ -214,7 +214,6 @@ public class CritterControl {
                 System.out.println(wardrobeIndex + " is out of bounds. Choose a valid number. Printing again.");
                 //play the options again
                 corral.printAllAccessories();
-                break;
             }
         }
         return commandFactory.newDressCommand(currentCritter, corral, corral.getAccessoryByIndex(wardrobeIndex));
@@ -242,7 +241,6 @@ public class CritterControl {
                 for(int i = 0; i < CritterType.values().length; i++){
                     System.out.println((i) + ": " + CritterType.values()[i].name());
                 }
-                break;
             }
         }
         return commandFactory.newBattleCommand(currentCritter, CritterType.values()[arenaIndex], corral);
@@ -265,7 +263,6 @@ public class CritterControl {
                 System.out.println(foodIndex + " is out of bounds. Choose a valid number. Printing again.");
                 //play the options again
                 corral.printAllFood();
-                break;
             }
         }
         return commandFactory.newFeedCommand(currentCritter, corral.getKitchen().get(foodIndex), corral);

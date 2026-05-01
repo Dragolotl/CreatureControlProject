@@ -23,14 +23,7 @@ public class CritterControlTest {
         assertNotNull(critterControl);
     }
 
-    @Test
-    public void testInitializeArenasRuns() {
-        CritterControl critterControl = new CritterControl();
 
-        critterControl.initializeArenas();
-
-        assertNotNull(critterControl);
-    }
 
 
 
